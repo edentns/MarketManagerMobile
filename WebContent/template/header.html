@@ -1,0 +1,36 @@
+<!-- Navigation -->
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" ng-click="isCollapsedNav = !isCollapsedNav">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar" />
+                <span class="icon-bar" /> 
+                <span class="icon-bar" /> 
+            </button>
+            <a class="navbar-brand navbar-brand-custom"><img class="logo" src="img/common/logo.png" alt="Logo"></a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="navbar-collapse" ng-class="isCollapsedNav ? 'collapse' : 'in'">
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-class="{ active: isActive('#!/malls'), none: noMall()}">
+                    <a href="#!/malls">조회하기</a>
+                </li>
+                <li ng-class="{ active: isActive('#!/mall-config')}">
+                    <a href="#!/mall-config">쇼핑몰 설정</a>
+                </li>
+                <li ng-class="{ active: isActive('#!/user-setting')}">
+                    <a href="#!/user-setting">개인정보 설정</a>
+                </li>
+                <li>
+                    <a href="" class="sign-out" ng-click="logout()">Sign Out</a>
+                </li>
+                
+            </ul>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>

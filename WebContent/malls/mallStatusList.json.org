@@ -1,0 +1,17 @@
+// [{
+//  "mallName": "auction",
+//  "userId": "user1",
+//  "order": "123367979",
+//  "inquiry": "12",
+//  "change": "5",
+//  "cancel": "3",
+//  "retrieveTime": "2016/08/12 13:35:00"
+// }, {
+//  "mallName": "coupon",
+//  "userId": "user2",
+//  "order": "1323",
+//  "inquiry": "123",
+//  "change": "555",
+//  "cancel": "322",
+//  "retrieveTime": "2016/08/12 13:55:00"
+// }]

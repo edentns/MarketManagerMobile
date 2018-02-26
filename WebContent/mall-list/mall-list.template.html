@@ -1,0 +1,57 @@
+<div id="top">
+    <div ng-include="'template/header.html'"></div>
+    <section>
+        <div class="container"> <!-- If Needed Left and Right Padding in 'md' and 'lg' screen means use container class -->
+            <div class="row hidden-lg hidden-xl hidden-md">
+                <h1><span ng-show="mallStat.length > 0">{{mallStat.length}} </span>Mall(s)</h1>
+                <div class="col-xm-6 col-sm-6">
+                    <div class="list-group">
+                        <a ng-repeat="mall in mallStat" ng-click="moveTo('mall_'+mall.NO_MRK)" href="" class="list-group-item">{{mall.NM_MNGMRK}} ({{mall.DC_MRKID}})<span class="badge">{{mall.total}}</span>
+                        <span class="align-right">{{mall.QT_NEWORD}} / {{mall.QT_INQ}} / {{mall.QT_ECHG + mall.QT_TKBK}} / {{mall.QT_CCL}}</span></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="hidden-lg hidden-xl hidden-md" />
+            <div class="row">
+                <div id="mall_{{mall.NO_MRK}}" class="col-xm-6 col-sm-4 col-md-3 col-xl-2" ng-repeat="mall in mallStat">
+                     <div class="well">
+                        <table class="table">
+                            <caption>
+                                <a href="{{mall.DC_SALEMNGURL}}" class="name" target="_blank"><strong>{{mall.NM_MNGMRK}} ({{mall.DC_MRKID}})<strong></a>
+                                <a href="" ng-click="reloadMallStat(mall.NO_MRK)" ng-disabled="mall.isDisabled"><span class="glyphicon glyphicon-refresh" ng-class="{'warning': hasError(mall.DTS_UPDATE, 3600000), 'glyphicon-refresh-animate': mall.isDisabled, 'disabled': mall.isDisabled}"></span></a>
+                            </caption>
+                            <tbody>
+                                <tr>
+                                    <th>주문</th>
+                                    <td>{{mall.QT_NEWORD}}</td>
+                                </tr>
+                                <tr>
+                                    <th>문의</th>
+                                    <td>{{mall.QT_INQ}}</td>
+                                </tr>
+                                <tr>
+                                    <th>교환/반품</th>
+                                    <td>{{mall.QT_ECHG != null && mall.QT_TKBK != null ? mall.QT_ECHG + mall.QT_TKBK : ''}}</td>
+                                </tr>
+                                <tr>
+                                    <th>취소</th>
+                                    <td>{{mall.QT_CCL}}</td>
+                                </tr>
+                                <tr>
+                                    <th>조회 시간</th>
+                                    <td>{{long2date(mall.DTS_UPDATE)}}</td>
+                                </tr>                        
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-xm-12" ng-hide="mallStat.length > 0">설정된 Mall이 없습니다</div>
+            </div>
+            <div class="top-link-block well well-sm" backtotop><a href="" ng-click="moveTo('top')"><span class="glyphicon glyphicon-chevron-up"></span> Back to Top</a></div>
+        </div>
+    </section>
+    <div ng-include="'template/footer.html'"></div>
+</div>
+
+
+

@@ -1,0 +1,26 @@
+.wrap-setting { padding: 20px 0;}
+
+.wrap-setting .cont-wrap { padding: 25px; border: 1px solid #a3a8b0; border-radius: 5px; background-color: #fff; }
+
+.wrap-setting dl { margin-bottom: 10px; }
+.wrap-setting dl:after { content: ''; display: block; clear: both; }
+.wrap-setting dl dt { float: left; width: 200px; padding-right: 15px; font-size: 15px; color: #444; line-height: 34px; font-weight: normal;}
+.wrap-setting dl dd { float: left; position: relative; margin-left: 15px; vertical-align: middle; line-height: 34px; }
+.wrap-setting dl dd .clear { display: none; position: absolute; top: 8px; right: 10px; width: 20px; height: 20px; background: url('../img/setting/btn_clear.png') no-repeat center center; }
+.wrap-setting dl dd.txt-read { font-size: 16px; color: #444; line-height: 34px; }
+.wrap-setting dl dd .pass-wrap { display: none; position: relative; width: 600px; overflow: hidden; }
+.wrap-setting dl dd .pass-wrap .im-txt { margin-bottom: 10px; color: #3b7dea; font-size: 15px; line-height: 26px; font-weight: 300; }
+.wrap-setting dl dd .pass-wrap input { width: 130px; }
+.wrap-setting dl dd .pass-wrap dl { display: inline-block; position: relative; margin-bottom: 0; }
+.wrap-setting dl dd .pass-wrap dl:after { content: ''; display: block; clear: both; }
+.wrap-setting dl dd .pass-wrap dl dt { width: 140px; font-family: 'Roboto bold'; }
+.wrap-setting dl dd .pass-wrap .clear { top: 8px; left: 150px; }
+.wrap-setting dl dd .pass-wrap dl dd.txt { position: absolute; top: 1px; left: 350px; width: 300px; color: #f3313a; font-size: 14px; }
+.wrap-setting dl dd .pass-wrap .btn-close { position: absolute; top: 15px; right: 0px; display: block; width: 20px; height: 20px; background: url('../img/setting/btn_popup_close.jpg') 0 0 no-repeat; cursor: pointer; }
+.wrap-setting dl dd .chk-wrap { line-height: 34px; font-size: 15px; color: #444; }
+.wrap-setting dl dd .chk-wrap label { margin-right: 20px; }
+.wrap-setting dl dd .chk-wrap input { margin-right: 3px; }
+.wrap-setting .star { background: url('../img/common/bg_voyage_star.png') no-repeat center right; }
+.wrap-setting .btn-wrap { margin-top: 30px; text-align: center; }
+
+

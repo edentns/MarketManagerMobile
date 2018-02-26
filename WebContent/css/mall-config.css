@@ -1,0 +1,18 @@
+.wrap-option {vertical-align:middle;}
+.wrap-option .option {display:inline; position:relative; margin-right:10px; vertical-align: ;}
+.wrap-option .option a { color: inherit; }
+.wrap-option .option > * { vertical-align: top; }
+.wrap-option .option > button:last-of-type { background-image: none; padding-right: 0; }
+.wrap-option .option .edit { cursor: pointer; display:inline-block; border:0px; padding:0 10px 0 0; font-size:13px; color:#3b7dea; background:url(../img/mall-config/bg_line_bar3.gif) no-repeat right 4px;}
+.wrap-option .option .delete { cursor: pointer; display:inline-block; border:0px; position: relative; padding:0 10px; font-size:13px; color:#3b7dea; background-color:transparent;  background:url(../img/mall-config/bg_line_bar3.gif) no-repeat right 4px;}
+.wrap-option .option .custom {display:inline-block; padding:0 5px; font-size:13px; color:#3b7dea; background-color:transparent;}
+.wrap-option .option .terminal {display:inline-block; padding:0 5px; font-size:13px; color:#3b7dea; background-color:transparent;}
+.wrap-option .tooltip {display: block; opacity:1; position:absolute; top:20px; left:-60px; z-index:10; width:264px; height:161px; padding-top: 30px; text-align:center; background:url(../img/mall-config/bg_oi_setting_tooltip.png) no-repeat;}
+.tooltip .txt {display: block; font-size:16px; color:#444; line-height: 1.2; min-height: 35px; }
+.tooltip .yes {display:inline-block; width:100px; height:40px; margin-top:10px; color: #fff; font-size: 14px; line-height: 40px; background-color: #475262; text-align: center; border-radius: 5px; border: 1px solid rgba(0,0,0,0); /* background:url(../images/btn_oi_tooltip_yes.png) no-repeat; */}
+.tooltip .no {display:inline-block; width:100px; height:40px; margin-top:10px; margin-left:5px;color: #444; font-size: 14px; line-height: 40px; background-color: #fff; text-align: center; border-radius: 5px;  border: 1px solid #ddd; /* background:url(../images/btn_oi_tooltip_no.png) no-repeat; */}
+.handle {display:inline; width:30px; height:20px; vertical-align:middle; background:url(../img/mall-config/btn_oi_sort_handle.png) no-repeat center center;}
+.wrap-option.single .option .edit { background: none; padding: 0; }
+
+.mall-select {width: 150px; color: #444444; height: 37px; line-height: 37px;}
+

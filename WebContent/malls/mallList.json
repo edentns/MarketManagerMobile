@@ -1,0 +1,26 @@
+{
+	"errorCode": "0",
+	"message": "success",
+	"timestamp": "2016-08-22 21:20:00+09:00",
+	"response": [{
+		"mallId": "1",
+		"mallName": "G 마켓",
+		"mallUrl": "http://www.gmarket.co.kr/"
+	}, {
+		"mallId": "2",
+		"mallName": "Auction",
+		"mallUrl": "http://www.auction.co.kr/"
+	}, {
+		"mallId": "3",
+		"mallName": "인터파크",
+		"mallUrl": "http://www.interpark.com/"
+	}, {
+		"mallId": "4",
+		"mallName": "스토어팜",
+		"mallUrl": "http://sell.storefame.naver.com/"
+	}, {
+		"mallId": "5",
+		"mallName": "11번가",
+		"mallUrl": "http://www.11st.co.kr/"
+	}]
+}

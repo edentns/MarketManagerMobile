@@ -1,0 +1,51 @@
+{
+    "errorCode": "0",
+    "message": "success",
+    "timestamp": "2016-08-22 21:20:00+09:00",
+    "response": [{
+        "id": "1",
+        "mallId": "2",
+        "mallName": "Auction",
+        "mallUrl": "http://www.auction.co.kr/",
+        "mallSellerId": "usera",
+        "mallSellerPwd": "alslslslslsl",
+        "isLoginAvailable": "true",
+        "lastLoginTime": "2016/08/17 10:35:05"
+    }, {
+        "id": "2",
+        "mallId": "1",
+        "mallName": "G 마켓",
+        "mallUrl": "http://www.gmarket.co.kr/",
+        "mallSellerId": "userg",
+        "mallSellerPwd": "alslslslslsl",
+        "isLoginAvailable": "true",
+        "lastLoginTime": "2016/08/18 18:55:05"
+    }, {
+        "id": "3",
+        "mallId": "5",
+        "mallName": "11번가",
+        "mallUrl": "http://www.11st.co.kr/",
+        "mallSellerId": "user1",
+        "mallSellerPwd": "alslslslslsl",
+        "isLoginAvailable": "true",
+        "lastLoginTime": "2016/08/19 14:55:05"
+    }, {
+        "id": "4",
+        "mallId": "3",
+        "mallName": "인터파크",
+        "mallUrl": "http://www.11st.co.kr/",
+        "mallSellerId": "userIn",
+        "mallSellerPwd": "alslslslslsl",
+        "isLoginAvailable": "true",
+        "lastLoginTime": "2016/08/15 09:55:05"
+    }, {
+        "id": "5",
+        "mallId": "4",
+        "mallName": "스토어팜",
+        "mallUrl": "http://www.11st.co.kr/",
+        "mallSellerId": "userS",
+        "mallSellerPwd": "alslslslslsl",
+        "isLoginAvailable": "true",
+        "lastLoginTime": "2016/08/16 19:55:05"
+    }]
+}

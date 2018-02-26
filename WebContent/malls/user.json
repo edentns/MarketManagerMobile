@@ -1,0 +1,10 @@
+{
+	"errorCode": "0",
+	"message": "success",
+	"timestamp": "2016-08-22 21:20:00+09:00",
+	"response": {
+		"sellerId": "sellerTool",
+		"email": "seller@mm25.co.kr",
+		"mobile": "010-1234-5678"
+	}
+}

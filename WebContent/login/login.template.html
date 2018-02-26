@@ -1,0 +1,25 @@
+<div class="login-page">
+    <div class="login">
+        <h1><img src="img/login/logo_big.jpg" width="165px" alt="Sellor Tool"></h1>
+        <form ng-submit="login()">
+        	<input class="form-control input-lg" type="text" placeholder="가입자번호" autocomplete="off" ng-model="bsCd">
+            <input class="form-control input-lg" type="text" placeholder="사용자 아이디" autocomplete="off" ng-model="userId">
+            <input class="form-control input-lg" type="password" placeholder="패스워드" autocomplete="off" ng-model="password">
+            <button type="submit" ng-disabled="isDisabled" class="btn btn-primary btn-block btn-lg">로그인</button>
+        </form>
+        <div>&nbsp;<a href="#!/user-create" ng-click="createUser()">가입하기</a></div>
+		<div>&nbsp;</div>
+		<div>&nbsp;<a ng-click="moveGooglePlay()" href="https://play.google.com/store/apps/details?id=mm25.com.mm7" >구글 앱 다운로드</a></div>
+        <br/>   
+        <div class="text-center">
+            <p>www.marketmanager.co.kr V 0.1.0 <span>{{loginVO.version}}</span>&nbsp&nbsp&nbsp
+            <span style="display:inline-block;">
+				<a href="mailto:help@marketmanager.co.kr"><img title="문의메일" src="/assets/img/common/email.png"/></a>
+				<a href="/assets/download/MembershipJoin(V1.0).pdf" target="_blank"><img title="회원가입메뉴얼" src="/assets/img/common/download.png"/></a>
+			</span>
+			</p>
+        </div>
+    </div>
+</div>
+<!-- Footer -->
+    
