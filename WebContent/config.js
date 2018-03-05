@@ -2,7 +2,7 @@
 	'use strict';
 	var envs = {
 		prod: {
-			root: "/MarketManagerServer",
+			root: "/MarketManagerServer_Mi",
             auth: {
 				secret: "c2VsbGVydG9vbDpzZWxsZXJ0b29sLXNlY3JldA==",
 			},
@@ -34,7 +34,7 @@
         			return GibberishAES.aesEncrypt(strPlain, this.key);
         		},
         		decrypt: function(strEncoded) {
-        			if(!envs.prod.encrypt) return strPlain;
+        			if(!envs.prod.encrypt) return strEncoded;
         			
         			var test = '';
         			GibberishAES.size(256);
