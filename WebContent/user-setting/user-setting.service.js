@@ -37,29 +37,40 @@
 			});
 			return def.promise;
 		}
-		function modifySeller (accessToken, data) {
-			var url = config.api.seller;
-			return doReq(accessToken,url,"PUT",data, 500,'Fail to modify a seller');
+		function modifySeller (data) {
+			var url = config.api.user;
+			return doReq(url,"PUT",data, 500,'Fail to modify a seller');
 		}
-		function doReq(accessToken, url, method, data, errorDefaultCode, errorDefaultMessage){
+		function doReq(url, method, data, errorDefaultCode, errorDefaultMessage){
 			var def = $q.defer();
 			var reqOption = {
 				method: method,
-				url: url,
-				headers: {
-					"Authorization": accessToken
-				}
+				url: url
 			};
 			if (data != undefined)
 				reqOption.data = data;
 
+			$http.defaults.headers.common.NO_M = 'SYME17122901';
 			var req = $http(reqOption);
 			req.then(function successCallback(response) {
-				response.data = config.aes256.decrypt(response.data);
-				def.resolve(response.data);
+				var retData = {};
+				retData.data = config.aes256.decrypt(response.data);
+				
+				if(response.status == 200) { 
+					retData.errorCode = "0"
+					def.resolve(retData);
+				}
+				else {
+					retData.message = response.data;
+					def.reject(retData);
+				}
 			}, function errorCallback(response) {
-				handleError(def, response, errorDefaultCode, errorDefaultMessage);
+				var retData = {};
+				retData.message = config.aes256.decrypt(response.data);
+				def.reject(retData);
 			});
+
+			$http.defaults.headers.common.NO_M = '';
 			return def.promise;
 		}
 		function handleError(def, response, defaultStatus, defaultMessage){

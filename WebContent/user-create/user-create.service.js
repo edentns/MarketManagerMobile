@@ -7,47 +7,43 @@
 	userCreateSevice.$inject = ['$http', '$q', '$window', 'config'];
 	function userCreateSevice($http, $q, $window, config) {
 		return {
-			createUser: createUser,
+			createUser : createUser,
+			dupCheckNmC: dupCheckNmC,
+			doChkMe    : doChkMe
 		};
 		
-		function createUser (data) {
-			var url = config.api.seller;
-			return doReq(url,"POST",data, 500,'Fail to create a user');
-		}
-		function doReq(url, method, data, errorDefaultCode, errorDefaultMessage){
-			var def = $q.defer();
-			var reqOption = {
-				method: method,
-				url: url
-			};
-			if (data != undefined)
-				reqOption.data = data;
-
-			var req = $http(reqOption);
-			req.then(function successCallback(response) {
-				def.resolve(response.data);
-			}, function errorCallback(response) {
-				handleError(def, response, errorDefaultCode, errorDefaultMessage);
+		function dupCheckNmC(nmC, dcEmiaddr){
+			return $http({
+				method	: "POST",
+				url		: config.api.dupCheckNmC,
+				headers	: { "Content-Type": "application/x-www-form-urlencoded; text/plain; */*; charset=utf-8" },
+				data    : $.param({L_NM_C:nmC, L_DC_EMIADDR:dcEmiaddr})
 			});
-			return def.promise;
 		}
-		function handleError(def, response, defaultStatus, defaultMessage){
-			var errorRes = {
-				message: defaultMessage,
-				status: defaultStatus
-			};
-
-			if (response.data == null) {
-				errorRes.message = 'Fail to connect';
-			} else if (response.data.error != null) {
-				errorRes.message = response.data.error;
-				if (response.data.status != null)
-					errorRes.status = 401;
-				else
-					errorRes.status = response.data.status;
-			}
-			def.reject(errorRes);
+		
+		function doChkMe(email){
+			return $http({
+				method	: "POST",
+				url		: config.api.doChkMe,
+				headers	: { "Content-Type": "application/x-www-form-urlencoded; text/plain; */*; charset=utf-8" },
+				data	: $.param({DC_EMIADDR:email})
+			});
 		}
-
+		
+		/**
+		 * 회원가입
+		 * @param {{}} data
+		 * @returns {*}
+		 */
+		function createUser(userJoinVO) {
+			$http.defaults.headers.common.NO_M = '';
+			
+			return $http({
+				method	: "POST",
+				url		: config.api.createUser,
+				headers	: { "Content-Type": "application/json; text/plain; */*; charset=utf-8" },
+				data    : userJoinVO
+			});
+		}
 	}
 })();

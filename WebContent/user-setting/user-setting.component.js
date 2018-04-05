@@ -32,7 +32,6 @@ component('userSetting', {
 				var updateUser = userSettingSevice.modifySeller(getUpdateUserBody());
 				updateUser.then(function successCallback(data) {
 					if (data.errorCode === "0") {
-						$scope.currentPwd = "";
 						$scope.newPwd = "";
 						$scope.confirmPwd = "";
 
@@ -46,13 +45,14 @@ component('userSetting', {
 
 				function getUpdateUserBody() {
 					var body = {
+						"DC_ID"  : $scope.userId,
 						"DC_EMIADDR": $scope.DC_EMIADDR,
-						"NO_CEPH": $scope.NO_CEPH,
-						"sellerPwd": $scope.currentPwd
+						"NO_CEPH": $scope.NO_CEPH
 					};
 
 					if (!($scope.newPwd == undefined) && !($scope.newPwd === "")) {
-						body.newPwd = $scope.newPwd;
+						body.DC_PWD = $scope.newPwd;
+						body.NEW_DC_PWD = $scope.newPwd;
 					}
 
 					return body;
@@ -68,11 +68,6 @@ component('userSetting', {
 
 				if ($scope.NO_CEPH == undefined || $scope.NO_CEPH === "") {
 					$window.alert("휴대폰 번호를 입력하세요.");
-					return false;
-				}
-
-				if ($scope.currentPwd == undefined || $scope.currentPwd === "") {
-					$window.alert("비밀번호를 입력하세요.");
 					return false;
 				}
 

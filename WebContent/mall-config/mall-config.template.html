@@ -25,12 +25,20 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label for="mallSellerNmMrk" class="sr-only">마켓명</label>
+                            <input type="search" class="form-control" id="NM_MRK" name="NM_MRK" placeholder="마켓명" ng-model="NM_MRK">
+                        </div>
+                        <div class="form-group">
                             <label for="mallSellerId" class="sr-only">ID</label>
                             <input type="search" class="form-control" id="DC_MRKID" name="DC_MRKID" placeholder="id" ng-model="DC_MRKID">
                         </div>
                         <div class="form-group">
                             <label for="passwordInput" class="sr-only">Password</label>
                             <input type="password" class="form-control" id="DC_PWD" name="DC_PWD" placeholder="password" ng-model="DC_PWD" ng-click="DC_PWD = null;">
+                        </div>
+                        <div class="form-group">
+                            <label for="mallSellerNmShop" class="sr-only">샵명칭</label>
+                            <input type="search" class="form-control" id="NM_SHOP" name="NM_SHOP" placeholder="샵명칭" ng-model="NM_SHOP">
                         </div>
                         <div class="form-group">
                             <button ng-show="isEditing == false" ng-disabled="isDisabled" class="btn btn-primary btn-block" id="btn-add" ng-click="addMall()">추가</button>
@@ -55,13 +63,13 @@
                             </caption>
                             <tbody>
                                 <tr>
-                                    <td>{{mall.CD_ITLSTAT === '002' ? "연결 가능" : "연결 불가"}} ({{long2date(mall.DTS_UPDATE)}})</td>
+                                    <td>{{mall.CD_ITLSTAT === '002' ? "연결 가능" : "연결 불가"}} ({{short2date(mall.DT_ITLSTART)}})</td>
                                     <!-- <td>"연결 가능" ({{long2date(mall.updatedTime)}})</td> -->
                                 </tr>
                                 <tr>
                                     <td>
                                         <button class="btn btn-primary" ng-disabled="isDisabled" ng-click="editMall(mall.NO_MRK)">수정</button>
-                                        <button class="btn btn-warning" ng-disabled="isDisabled" ng-click="deleteMall(mall.NO_MRK)">삭제</button>
+                                        <button class="btn btn-warning" ng-disabled="isDisabled" ng-click="deleteMall(mall)">삭제</button>
                                     </td>
                                 </tr>
                             </thead>

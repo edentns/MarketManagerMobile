@@ -10,6 +10,7 @@
 			isLogin: isLogin,
 			logout: logout,
 			long2date: long2date,
+			short2date: short2date,
 			init:init,
 		};
 		function init($scope){
@@ -30,6 +31,9 @@
 			$scope.logout = function() {
 				logout();
 				$window.location.href = "#!/login";
+			};
+			$scope.short2date = function(timestamp) {
+				return short2date(timestamp);
 			};
 			$scope.long2date = function(timestamp) {
 				return long2date(timestamp);
@@ -78,6 +82,14 @@
 		function long2date(timestamp){
 			try {
 				return moment(timestamp).format('YYYY-MM-DD HH:mm');
+			} catch (err) {
+				return '';
+			}
+		}
+
+		function short2date(timestamp){
+			try {
+				return moment(timestamp).format('YYYY-MM-DD');
 			} catch (err) {
 				return '';
 			}

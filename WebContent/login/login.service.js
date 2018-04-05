@@ -27,12 +27,14 @@
 			
 			login.then(function successCallback(response) {
 				var result = null
-				if (response != null && response.data != null){
-					if (response.data.expires_in < 100){
-						result = refreshToken(response.data.refresh_token);
-					}else{
-						response.data = config.aes256.decrypt(response.data);
+				if (response != null && response.data != null) {
+					var data = config.aes256.decrypt(response.data);
+					if(response.status === 200) {
+						response.data = config.aes256.decrypt(data);
 						result = response.data;
+					}
+					else {
+						handleError(def, response, data);
 					}
 					def.resolve(result);
 				}else{

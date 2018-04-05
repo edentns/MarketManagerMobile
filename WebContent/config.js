@@ -6,16 +6,29 @@
             auth: {
 				secret: "c2VsbGVydG9vbDpzZWxsZXJ0b29sLXNlY3JldA==",
 			},
-			encrypt : true 
+			encrypt : false 
 		},
 	}
-	var env = envs.prod;
-	angular.module('sellorToolApp')
-		.constant('config', {
+	var env = envs.prod,
+	    sellorToolApp = angular.module('sellorToolApp');
+	
+	sellorToolApp.config(["$httpProvider", function ($httpProvider) {
+		$httpProvider.defaults.headers.common["Content-Type"] = "application/json; text/plain; */*; charset=utf-8";
+	    $httpProvider.interceptors.push("InterceptorSvc");
+    }]);
+    
+	sellorToolApp.constant('config', {
 			api: {
-				oauthToken: env.root + '/login',
-				stat: env.root + '/ut02Db',
-				logout: env.root + '/logout'
+				oauthToken : env.root + '/login',
+				stat       : env.root + '/ut02Db',
+				logout     : env.root + '/logout',
+				dupCheckNmC: env.root + '/dupCheckNmC',
+				doChkMe    : env.root + '/chkMe',
+				createUser : env.root + '/saveUserJoin',
+				sy09Mrk    : env.root + '/sy09Mrk',
+				user       : env.root + '/userMb',
+				sy09MrkCons: env.root + '/sy09MrkCons',
+				mo01MallList: env.root + '/mo01MallList'
 			},
             auth: env.auth,
 

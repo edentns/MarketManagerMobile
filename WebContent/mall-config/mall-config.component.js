@@ -12,7 +12,7 @@ component('mallConfig', {
 			}
 			$scope.isEditing = false;
 			$scope.isDisabled = false;
-			$scope.showForm = function(){
+			$scope.showForm = function() {
 				$scope.isFormVisible = true;
 			};
 			var reqMallSeller = mallConfigSevice.getMallSeller();
@@ -57,8 +57,10 @@ component('mallConfig', {
 							}
 						}
 						// $scope.selectedMall
+						$scope.NM_MRK   = $scope.mallConfiguration[i].NM_MRK;
+						$scope.NM_SHOP  = $scope.mallConfiguration[i].NM_SHOP;
 						$scope.DC_MRKID = $scope.mallConfiguration[i].DC_MRKID;
-						$scope.DC_PWD = $scope.mallConfiguration[i].DC_PWD;
+						$scope.DC_PWD   = $scope.mallConfiguration[i].DC_PWD;
 						break;
 					}
 				}
@@ -69,15 +71,22 @@ component('mallConfig', {
 					return;
 				}
 				$scope.isDisabled = true;
-				var data = {
-					"NO_MNGMRK": $scope.selectedMall.NO_MNGMRK,
-					"DC_MRKID" : $scope.DC_MRKID,
-					"DC_PWD"   : $scope.DC_PWD
-				};
+				var data = [{
+					"NO_MNGMRK"  : $scope.selectedMall.NO_MNGMRK,
+					"DC_MRKID"   : $scope.DC_MRKID,
+					"DC_PWD"     : $scope.DC_PWD,
+					"NEW_DC_PWD" : $scope.DC_PWD,
+					"NM_MRK"     : $scope.NM_MRK,
+					"NM_SHOP"    : ($scope.NM_SHOP===undefined)?'':$scope.NM_SHOP,
+					"API_KEY"    : "",
+					"NEW_API_KEY": "",
+					"YN_USE"     : "Y"
+				}];
+				
 				var addMallSeller = mallConfigSevice.createMallSeller(data);
 				addMallSeller.then(function successCallback(data) {
 					if (data.errorCode === "0") {
-						$scope.mallConfiguration.push(data.response);
+						$scope.mallConfiguration = data.response;
 						$scope.cancelMall();
 						$rootScope.hasMall = true;
 						$window.sessionStorage.setItem("hasMall", true);
@@ -85,6 +94,7 @@ component('mallConfig', {
 						// TODO: 에러처리
 					}
 				}, function errorCallback(data) {
+					$scope.isDisabled = false;
 					$window.alert(data.message);
 				});
 			};
@@ -95,29 +105,20 @@ component('mallConfig', {
 					return;
 				}
 				$scope.isDisabled = true;
-				var data = {
-					"NO_MRK": $scope.editingMallId,
-					"NO_MNGMRK": $scope.selectedMall.NO_MNGMRK,
-					"DC_MRKID": $scope.DC_MRKID,
-					"DC_PWD": $scope.DC_PWD
-				};
-				var updateMallSeller = mallConfigSevice.modifyMallSeller($rootScope.authorization, data);
+				var data = [{
+					"NO_MRK"    : $scope.editingMallId,
+					"NO_MNGMRK" : $scope.selectedMall.NO_MNGMRK,
+					"DC_MRKID"  : $scope.DC_MRKID,
+					"DC_PWD"    : $scope.DC_PWD,
+					"NEW_DC_PWD": $scope.DC_PWD,
+					"NM_MRK"    : $scope.NM_MRK,
+					"NM_SHOP"   : ($scope.NM_SHOP===undefined)?'':$scope.NM_SHOP,
+					"YN_USE"    : "Y",
+				}];
+				var updateMallSeller = mallConfigSevice.modifyMallSeller(data);
 				updateMallSeller.then(function successCallback(data) {
 					if (data.errorCode === "0") {
-						for (var i = 0; i < $scope.mallConfiguration.length; i++) {
-							if ($scope.mallConfiguration[i].NO_MRK === data.response.NO_MRK) {
-								$scope.mallConfiguration[i].NO_MNGMRK     = data.response.NO_MNGMRK;
-								$scope.mallConfiguration[i].DC_SALEMNGURL = data.response.DC_SALEMNGURL;
-								$scope.mallConfiguration[i].DC_MRKID      = data.response.DC_MRKID;
-								$scope.mallConfiguration[i].DC_PWD        = data.response.DC_PWD;
-								$scope.mallConfiguration[i].CD_ITLSTAT    = data.response.CD_ITLSTAT;
-								$scope.mallConfiguration[i].DTS_UPDATE    = data.response.DTS_UPDATE;
-								$scope.isEditing = false;
-								break;
-							}
-						}
-						// $scope.mallConfiguration.push(data.response);
-						// $scope.mallCount = $scope.mallConfiguration.length;
+						$scope.mallConfiguration = data.response;
 						$scope.cancelMall();
 					} else {
 						// TODO: 에러 처리
@@ -128,23 +129,34 @@ component('mallConfig', {
 			};
 
 			// Mall Seller 중 하나를 삭제할 때 (이 버튼은 정말 삭제할 것인지 확인하는 팝업창에 있음)
-			$scope.deleteMall = function(mallId) {
+			$scope.deleteMall = function(data) {
 				if ($scope.isDisabled) {
 					return;
 				}
 				$scope.isDisabled = true;
-				var deleteMallSeller = mallConfigSevice.removeMallSeller($rootScope.authorization, mallId);
+				
+				var data = [{
+					"NO_MRK"    : data.NO_MRK,
+					"NO_MNGMRK" : data.NO_MNGMRK,
+					"DC_MRKID"  : data.DC_MRKID,
+					"DC_PWD"    : data.DC_PWD,
+					"NEW_DC_PWD": data.DC_PWD,
+					"NM_MRK"    : data.NM_MRK
+				}];
+				var deleteMallSeller = mallConfigSevice.removeMallSeller(data);
 				deleteMallSeller.then(function successCallback(data) {
 					$scope.isDisabled = true;
 					if (data.errorCode === "0") {
-						for (var i = 0; i < $scope.mallConfiguration.length; i++) {
-							if ($scope.mallConfiguration[i].NO_MRK === NO_MRK) {
-								$scope.mallConfiguration.splice(i, 1);
-								break;
-							}
-						}
-						// $scope.mallConfiguration.remove(mall);
-						$scope.mallCount = $scope.mallConfiguration.length;
+						$scope.mallConfiguration = data.response;
+						$scope.cancelMall();
+//						for (var i = 0; i < $scope.mallConfiguration.length; i++) {
+//							if ($scope.mallConfiguration[i].NO_MRK === NO_MRK) {
+//								$scope.mallConfiguration.splice(i, 1);
+//								break;
+//							}
+//						}
+//						// $scope.mallConfiguration.remove(mall);
+//						$scope.mallCount = $scope.mallConfiguration.length;
 					} else {
 						// TODO: 에러 처리
 					}
@@ -158,10 +170,11 @@ component('mallConfig', {
 				$scope.selectedMall  = null;
 				$scope.DC_MRKID      = null;
 				$scope.DC_PWD        = null;
+				$scope.NM_MRK        = null;
+				$scope.NM_SHOP       = null;
 				$scope.isEditing     = false;
 				$scope.isDisabled    = false;
 				$scope.isFormVisible = false;
-				
 			};
 
 			// Mall Seller를 추가/수정 하기 전에 유효성 검증
@@ -171,6 +184,11 @@ component('mallConfig', {
 					return false;
 				}
 
+				if ($scope.NM_MRK == undefined || $scope.NM_MRK === "") {
+					$window.alert("마켓명을 입력하세요.");
+					return false;
+				}
+				
 				if ($scope.DC_MRKID == undefined || $scope.DC_MRKID === "") {
 					$window.alert("ID를 입력하세요.");
 					return false;

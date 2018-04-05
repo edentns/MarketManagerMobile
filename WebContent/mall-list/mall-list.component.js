@@ -53,19 +53,33 @@ component('mallList', {
 				}
 				if (!$scope.mallStat[index].isDisabled){
 					$scope.mallStat[index].isDisabled = true;
-					var req = mallListService.getStat($rootScope.authorization, NO_MRK);
+					// 각 Mall Seller의 판매 실적을 가져옴
+					var param = {
+						DC_MRKID: $scope.mallStat[index].DC_MRKID,
+						NO_MNGMRK: $scope.mallStat[index].NO_MNGMRK
+					};
+					
+					var req = mallListService.reloadMallStat(param);
 					req.then(function successCallback(data) {
 						$scope.mallStat[index].isDisabled = false;
 						if (data.errorCode === "0") {
-							$scope.mallStat[index].NM_MNGMRK     = data.response.NM_MNGMRK;
-							$scope.mallStat[index].DC_SALEMNGURL = data.response.DC_SALEMNGURL;
-							$scope.mallStat[index].DC_MRKID      = data.response.DC_MRKID;
-							$scope.mallStat[index].QT_NEWORD     = data.response.QT_NEWORD;
-							$scope.mallStat[index].QT_INQ        = data.response.QT_INQ;
-							$scope.mallStat[index].QT_ECHG       = data.response.QT_ECHG;
-							$scope.mallStat[index].QT_TKBK       = data.response.QT_TKBK;
-							$scope.mallStat[index].QT_CCL        = data.response.QT_CCL;
-							$scope.mallStat[index].DTS_UPDATE    = data.response.DTS_UPDATE;
+							var updateDt = new Date(data.response.gdatetime);
+							var month = '' + (updateDt.getMonth()+1);
+							var day = '' + updateDt.getDate();
+							var hour = '' + updateDt.getHours();
+							var min = '' + updateDt.getMinutes();
+							
+							if(month.length < 2) month = '0' + month;
+							if(day.length < 2) day = '0' + day;
+							if(hour.length < 2) hour = '0' + hour;
+							if(min.length < 2) min = '0' + min;
+							
+							$scope.mallStat[index].QT_NEWORD     = data.response.neworder*1;
+							$scope.mallStat[index].QT_INQ        = data.response.inquiryinfo*1;
+							$scope.mallStat[index].QT_ECHG       = data.response.exchangeorder*1;
+							$scope.mallStat[index].QT_TKBK       = data.response.returnsorder*1;
+							$scope.mallStat[index].QT_CCL        = data.response.cancelorder*1;
+							$scope.mallStat[index].DTS_UPDATE    = [updateDt.getFullYear(), month, day].join('-') + ' ' + [hour, min].join(':');
 							$scope.mallStat[index].total = $scope.mallStat[index].QT_NEWORD + $scope.mallStat[index].QT_INQ  + 
 							                               $scope.mallStat[index].QT_ECHG   + $scope.mallStat[index].QT_TKBK + 
 							                               $scope.mallStat[index].QT_CCL;

@@ -8,16 +8,24 @@
                  <div class="col-xm-12">
                     <form>
                         <div class="form-group">
-                            <label for="userId">사용자 아이디<span class="glyphicon glyphicon-star required-field"></span></label>
-                            <input type="text" class="form-control" id="userId" name="userId" placeholder="사용자 아이디" ng-model="userId" />
+                            <label for="userId">사업자명<span class="glyphicon glyphicon-star required-field"></span></label>
+                            <input type="text" class="form-control" id="companyName" name="userId" placeholder="사업자명" ng-model="companyName" ng-change="changeCompanyName()"/>
                         </div>
                         <div class="form-group">
                             <label for="email">이메일<span class="glyphicon glyphicon-star required-field"></span></label>
-                            <input type="text" class="form-control" id="email" name="email" placeholder="이메일" ng-model="email">
+                            <input type="text" class="form-control" id="email" name="email" placeholder="이메일" ng-model="email" ng-change="changeCompanyName()">
                         </div>
                         <div class="form-group">
+                            <label></label>
+                            <button ng-disabled="isDisabled" class="btn btn-primary btn-block" id="dupCheck" ng-click="dupCheck()">중복확인</button>
+                        </div>
+                        <!-- div class="form-group">
                             <label for="mobile">휴대전화번호<span class="glyphicon glyphicon-star required-field"></span></label>
                             <input type="text" class="form-control" id="mobile" name="mobile" placeholder="휴대전화번호" ng-model="mobile">
+                        </div-->
+                        <div class="form-group">
+                            <label for="userId">사용자 아이디<span class="glyphicon glyphicon-star required-field"></span></label>
+                            <input type="text" class="form-control" id="userId" name="userId" placeholder="사용자 아이디" ng-model="userId" />
                         </div>
                         <div class="form-group">
                             <label for="pwd">비밀번호<span class="glyphicon glyphicon-star required-field"></span></label>

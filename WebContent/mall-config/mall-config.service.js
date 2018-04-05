@@ -61,21 +61,55 @@
 			$http.defaults.headers.common.NO_M = 'SYME17122901';
 			var req = $http({
                 method   : "POST",
-                url		 : APP_CONFIG.domain +"/sy09Mrk/"+CUD,
+                url		 : config.api.sy09Mrk + "/" + CUD,
                 data     : config.aes256.encrypt(param)
             });
 			
 			req.then(function successCallback(response) {
-				$http.defaults.headers.common.NO_M = '';
-				var rtnVal = {};
-				rtnVal.errorCode = "0";
-				response.data = config.aes256.decrypt(response.data);
-				rtnVal.response = response.data.results[0];
-				def.resolve(rtnVal);
+				if(response.status === 200) {
+
+					if(CUD === "I" || CUD === "U") {
+						var patamCon = {
+	                    	NO_MNGMRK: param[0].NO_MNGMRK,
+	                    	DC_MRKID: param[0].DC_MRKID,
+	                    	NM_SHOP: param[0].NM_SHOP
+	                    };
+						
+						conMrk(patamCon).then(function successCallback(data) {
+							if(data.status === 200) {
+								getMallSeller().then(function successCallback(data) {
+									if (data.errorCode === "0") {
+										def.resolve(data);
+									} 
+									else {
+										def.reject({"message":data.data});
+									}
+								});
+							} 
+							else {
+								def.reject({"message":data.data});
+							}
+						}, function errorCallback(response) {
+							$http.defaults.headers.common.NO_M = '';
+							def.reject({"message":data.data});
+						});
+					}
+					else {
+						getMallSeller().then(function successCallback(data) {
+							if (data.errorCode === "0") {
+								def.resolve(data);
+							} 
+							else {
+								def.reject({"message":data.data});
+							}
+						});
+					}
+				}
+				else {
+					def.reject({"message":response.data});
+				}
 			}, function errorCallback(response) {
-				if     (CUD === "I") handleError(def, response, 500, 'Fail to add a mall');
-				else if(CUD === "U") handleError(def, response, 500, 'Fail to modify a mall');
-				else if(CUD === "D") handleError(def, response, 500, 'Fail to remove a mall');
+				def.reject({"message":response.data});
 			});
 			return def.promise;
 		}
@@ -105,6 +139,17 @@
 			});
 			return def.promise;
 		}
+
+    	function conMrk( aParam ) {
+			$http.defaults.headers.common.NO_M = 'SYME17122901';
+            return $http({
+                method   : "POST",
+                url		 : config.api.sy09MrkCons,
+				headers	: { "Content-Type": "application/x-www-form-urlencoded; text/plain; */*; charset=utf-8" },
+                data     : $.param(aParam)
+            });
+        }
+		
 		function handleError(def, response, defaultStatus, defaultMessage){
 			var errorRes = {
 				message: defaultMessage,
