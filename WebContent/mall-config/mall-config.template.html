@@ -60,6 +60,7 @@
                         <table class="table">
                             <caption>
                                 <a href="{{mall.DC_SALEMNGURL}}" class="name" target="_blank"><strong>{{mall.NM_MNGMRK}} ({{mall.DC_MRKID}})<strong></a>
+                                <a href="" ng-click="conMrk(mall.NO_MNGMRK, mall.DC_MRKID, mall.NM_SHOP)" ng-disabled="mall.isDisabled"><span class="glyphicon glyphicon-refresh" ng-class="{'warning': hasError(mall.DTS_UPDATE, 3600000), 'glyphicon-refresh-animate': mall.isDisabled, 'disabled': mall.isDisabled}"></span></a>
                             </caption>
                             <tbody>
                                 <tr>

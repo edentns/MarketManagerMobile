@@ -42,7 +42,7 @@ component('mallList', {
 					// TODO: 에러 처리
 				}
 			}, function errorCallback(data) {
-				$window.alert(data.message);
+				//$window.alert(data.message);
 			});
 			$scope.reloadMallStat = function(NO_MRK) {
 				var index = -1;
@@ -88,7 +88,7 @@ component('mallList', {
 						}
 					}, function errorCallback(data) {
 						$scope.mallStat[index].isDisabled = false;
-						$window.alert(data.message);
+						//$window.alert(data.message);
 					});
 				}
 				

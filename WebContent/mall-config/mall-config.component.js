@@ -27,7 +27,7 @@ component('mallConfig', {
 					// TODO: 에러처리
 				}
 			}, function errorCallback(data) {
-				$window.alert(data.message);
+				//$window.alert(data.message);
 			});
 
 			// Seller Tool에서 관리하는 Mall들의 리스트를 가져옴
@@ -39,7 +39,7 @@ component('mallConfig', {
 					// TODO: 에러처리
 				}
 			}, function errorCallback(data) {
-				$window.alert(data.message);
+				//$window.alert(data.message);
 			});
 
 			// Mall Seller 리스트의 Edit 버튼을 누르면 해당 id의 것을 편집하도록
@@ -65,6 +65,35 @@ component('mallConfig', {
 					}
 				}
 			};
+			
+			$scope.conMrk = function(NO_MNGMRK, DC_MRKID, NM_SHOP) {
+				var paramCon = {
+		            	NO_MNGMRK: NO_MNGMRK,
+		            	DC_MRKID: DC_MRKID,
+		            	NM_SHOP: NM_SHOP
+		            };
+		            
+				var conMrk = mallConfigSevice.conMrk(paramCon);
+				conMrk.then(function successCallback(data) {
+					if(data.errorCode === "0") {
+						mallConfigSevice.getMallSeller().then(function successCallback(data) {
+							if (data.errorCode === "0") {
+								$scope.mallConfiguration = data.response;
+							} 
+							else {
+								//def.reject({"message":data.data});
+							}
+						});
+					} 
+					else {
+						$window.alert(data.message);
+					}
+				}, function errorCallback(data) {
+					//$scope.isDisabled = false;
+					$window.alert(data.message);
+				});
+			};
+			
 			// 새로운 Mall Seller를 추가
 			$scope.addMall = function() {
 				if (checkEditingFields() == false || $scope.isDisabled) {

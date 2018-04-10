@@ -22,14 +22,13 @@
 			var req = $http({
 				method: 'POST',
 				url: url,
-				data: config.aes256.encrypt(param)
+				data: param
 			});
 			
 			req.then(function successCallback(response) {
 				$http.defaults.headers.common.NO_M = '';
 				var rtnVal = {};
 				rtnVal.errorCode = "0";
-				response.data = config.aes256.decrypt(response.data);
 				rtnVal.response = response.data.results[0][0];
 				def.resolve(rtnVal);
 			}, function errorCallback(response) {
@@ -53,9 +52,7 @@
 			$http.defaults.headers.common.NO_M = 'SYME17122901';
 			var req = $http(reqOption);
 			req.then(function successCallback(response) {
-				var retData = {};
-				retData.data = config.aes256.decrypt(response.data);
-				
+				var retData = {};				
 				if(response.status == 200) { 
 					retData.errorCode = "0"
 					def.resolve(retData);
@@ -66,7 +63,7 @@
 				}
 			}, function errorCallback(response) {
 				var retData = {};
-				retData.message = config.aes256.decrypt(response.data);
+				retData.message = response.data;
 				def.reject(retData);
 			});
 

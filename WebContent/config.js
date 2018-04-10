@@ -31,6 +31,7 @@
 				mo01MallList: env.root + '/mo01MallList'
 			},
             auth: env.auth,
+            encrypt : env.encrypt,
 
             /**
              * 데이터를 암복호화

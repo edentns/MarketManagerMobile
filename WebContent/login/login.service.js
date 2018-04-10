@@ -16,65 +16,35 @@
 
 			$http.defaults.headers.common.NO_M = '';
 			
-			var encData = config.aes256.encrypt($.param({NO_C : bsCd, user : username, password : password}));
-			
 			var login =  $http({
 				method: 'POST',
 				url: loginUrl,
 				headers	: { "Content-Type": "application/x-www-form-urlencoded; text/plain; */*; charset=utf-8" },
-				data	: encData
+				data	: $.param({NO_C : bsCd, user : username, password : password})
 			});
 			
 			login.then(function successCallback(response) {
 				var result = null
 				if (response != null && response.data != null) {
-					var data = config.aes256.decrypt(response.data);
 					if(response.status === 200) {
-						response.data = config.aes256.decrypt(data);
 						result = response.data;
 					}
 					else {
-						handleError(def, response, data);
+						def.reject(response.data);
 					}
 					def.resolve(result);
 				}else{
-					handleError(def, response, 'Fail to login');
+					def.reject("로그인 실패하였습니다..");
 				}
 			}, function errorCallback(response) {
-				handleError(def, response, 'Fail to login');
-			});
-			return def.promise;
-
-		}
-
-		function refreshToken (refresh_token) {
-			var def = $q.defer();
-			var url = config.api.oauthToken;
-			var tokenReq =  $http({
-				method: 'POST',
-				url: url,
-				headers: {
-					"Authorization": "Basic "+config.auth.secret,
-					'Content-Type': 'application/x-www-form-urlencoded'
-				},
-    			data: $httpParamSerializerJQLike({'refresh_token': refresh_token, 'grant_type': 'refresh_token'})
-			});
-			tokenReq.then(function successCallback(response) {
-				def.resolve(response.data);
-			}, function errorCallback(response) {
-				handleError(def, response, 'Fail to login');
+				if(response.data != null && response.data != null) {
+					def.reject(response.data);
+				}
+				else {
+					def.reject("로그인 실패하였습니다...");
+				}
 			});
 			return def.promise;
 		}
-		function handleError(def, response, defaultMessage){
-			var errorMessage = defaultMessage;
-			if (response.data == null) {
-				errorMessage = 'Fail to connect';
-			} else if (response.data.error_description != null) {
-				errorMessage = response.data.error_description;
-			}
-			def.reject(errorMessage);
-		}
-
 	}
 })();

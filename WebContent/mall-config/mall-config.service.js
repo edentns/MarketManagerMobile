@@ -11,9 +11,10 @@
 			createMallSeller: createMallSeller,
 			modifyMallSeller: modifyMallSeller,
 			removeMallSeller: removeMallSeller,
+			conMrk: conMrk,
 			getMall: getMall
 		};
-		
+
 		function getMallSeller () {
 			var param = {
 					procedureParam: "USP_MO_01STAT_GET"
@@ -25,14 +26,13 @@
 			var req = $http({
 				method: 'POST',
 				url: url,
-				data: config.aes256.encrypt(param)
+				data: param
 			});
 			
 			req.then(function successCallback(response) {
 				$http.defaults.headers.common.NO_M = '';
 				var rtnVal = {};
 				rtnVal.errorCode = "0";
-				response.data = config.aes256.decrypt(response.data);
 				rtnVal.response = response.data.results[0];
 				def.resolve(rtnVal);
 			}, function errorCallback(response) {
@@ -62,48 +62,19 @@
 			var req = $http({
                 method   : "POST",
                 url		 : config.api.sy09Mrk + "/" + CUD,
-                data     : config.aes256.encrypt(param)
+                data     : param
             });
 			
 			req.then(function successCallback(response) {
 				if(response.status === 200) {
-
-					if(CUD === "I" || CUD === "U") {
-						var patamCon = {
-	                    	NO_MNGMRK: param[0].NO_MNGMRK,
-	                    	DC_MRKID: param[0].DC_MRKID,
-	                    	NM_SHOP: param[0].NM_SHOP
-	                    };
-						
-						conMrk(patamCon).then(function successCallback(data) {
-							if(data.status === 200) {
-								getMallSeller().then(function successCallback(data) {
-									if (data.errorCode === "0") {
-										def.resolve(data);
-									} 
-									else {
-										def.reject({"message":data.data});
-									}
-								});
-							} 
-							else {
-								def.reject({"message":data.data});
-							}
-						}, function errorCallback(response) {
-							$http.defaults.headers.common.NO_M = '';
+					getMallSeller().then(function successCallback(data) {
+						if (data.errorCode === "0") {
+							def.resolve(data);
+						} 
+						else {
 							def.reject({"message":data.data});
-						});
-					}
-					else {
-						getMallSeller().then(function successCallback(data) {
-							if (data.errorCode === "0") {
-								def.resolve(data);
-							} 
-							else {
-								def.reject({"message":data.data});
-							}
-						});
-					}
+						}
+					});
 				}
 				else {
 					def.reject({"message":response.data});
@@ -124,14 +95,13 @@
 			var req = $http({
 				method: 'POST',
 				url: url,
-				data: config.aes256.encrypt(param)
+				data: param
 			});
 			
 			req.then(function successCallback(response) {
 				$http.defaults.headers.common.NO_M = '';
 				var rtnVal = {};
 				rtnVal.errorCode = "0";
-				response.data = config.aes256.decrypt(response.data);
 				rtnVal.response = response.data.results[0];
 				def.resolve(rtnVal);
 			}, function errorCallback(response) {
@@ -141,13 +111,30 @@
 		}
 
     	function conMrk( aParam ) {
+    		var def = $q.defer();
+    		
 			$http.defaults.headers.common.NO_M = 'SYME17122901';
-            return $http({
-                method   : "POST",
-                url		 : config.api.sy09MrkCons,
+            var req = $http({
+                method  : "POST",
+                url		: config.api.sy09MrkCons,
 				headers	: { "Content-Type": "application/x-www-form-urlencoded; text/plain; */*; charset=utf-8" },
-                data     : $.param(aParam)
+                data    : $.param(aParam)
             });
+            
+            req.then(function successCallback(response) {
+				$http.defaults.headers.common.NO_M = '';
+				var rtnVal = {};
+				rtnVal.errorCode = "0";
+				//rtnVal.response = response.data.results[0];
+				def.resolve(rtnVal);
+			}, function errorCallback(response) {
+				//handleError(def, response, 500, '연동에 실패하였습니다.');
+				if(response.data != null && response.data !== "") 
+					def.reject({errorCode:"1", message:response.data});
+				else
+					def.reject({errorCode:"1", message:"연동에 실패하였습니다."});
+			});
+			return def.promise;
         }
 		
 		function handleError(def, response, defaultStatus, defaultMessage){
