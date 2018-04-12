@@ -84,11 +84,21 @@ component('mallList', {
 							                               $scope.mallStat[index].QT_ECHG   + $scope.mallStat[index].QT_TKBK + 
 							                               $scope.mallStat[index].QT_CCL;
 						} else {
-							// TODO: 에러 처리
+							if(data.message !== null && data.message !== '') {
+								$window.alert(data.message);
+							}
+							else if(data.data !== null && data.data !== '') {
+								$window.alert(data.data);
+							}
 						}
 					}, function errorCallback(data) {
 						$scope.mallStat[index].isDisabled = false;
-						//$window.alert(data.message);
+						if(data.message !== null && data.message !== '') {
+							$window.alert(data.message);
+						}
+						else if(data.data !== null && data.data !== '') {
+							$window.alert(data.data);
+						}
 					});
 				}
 				

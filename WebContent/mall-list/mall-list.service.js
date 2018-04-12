@@ -56,6 +56,7 @@
 				def.resolve(rtnVal);
 			}, function errorCallback(response) {
 				rtnVal.errorCode = "1";
+				rtnVal.message = response.data;
 				def.resolve(rtnVal);
 			});
 			return def.promise;
