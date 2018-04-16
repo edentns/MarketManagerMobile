@@ -83,6 +83,8 @@ component('mallList', {
 							$scope.mallStat[index].total = $scope.mallStat[index].QT_NEWORD + $scope.mallStat[index].QT_INQ  + 
 							                               $scope.mallStat[index].QT_ECHG   + $scope.mallStat[index].QT_TKBK + 
 							                               $scope.mallStat[index].QT_CCL;
+							
+							$window.alert("정보를 조회하였습니다.");
 						} else {
 							if(data.message !== null && data.message !== '') {
 								$window.alert(data.message);

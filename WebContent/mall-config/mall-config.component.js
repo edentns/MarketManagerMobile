@@ -66,21 +66,24 @@ component('mallConfig', {
 				}
 			};
 			
-			$scope.conMrk = function(NO_MNGMRK, DC_MRKID, NM_SHOP) {
+			$scope.conMrk = function(mall) {
 				var paramCon = {
-		            	NO_MNGMRK: NO_MNGMRK,
-		            	DC_MRKID: DC_MRKID,
-		            	NM_SHOP: NM_SHOP
+		            	NO_MNGMRK: mall.NO_MNGMRK,
+		            	DC_MRKID: mall.DC_MRKID,
+		            	NM_SHOP: mall.NM_SHOP
 		            };
 		            
 				var conMrk = mallConfigSevice.conMrk(paramCon);
+				mall.isDisabled = true;
 				conMrk.then(function successCallback(data) {
 					if(data.errorCode === "0") {
 						mallConfigSevice.getMallSeller().then(function successCallback(data) {
 							if (data.errorCode === "0") {
 								$scope.mallConfiguration = data.response;
+								$window.alert("연결 성공하였습니다.");
 							} 
 							else {
+								$window.alert("연결에 실패하였습니다.");
 								//def.reject({"message":data.data});
 							}
 						});
@@ -88,9 +91,11 @@ component('mallConfig', {
 					else {
 						$window.alert(data.message);
 					}
+					mall.isDisabled = false;
 				}, function errorCallback(data) {
 					//$scope.isDisabled = false;
 					$window.alert(data.message);
+					mall.isDisabled = false;
 				});
 			};
 			
