@@ -17,6 +17,11 @@ component('userSetting', {
 				if (data.errorCode === "0") {
 					$scope.DC_EMIADDR = data.response.DC_EMIADDR;
 					$scope.NO_CEPH = data.response.NO_CEPH;
+					
+					var reqCdPushProc = userSettingSevice.getCdPushProc($rootScope.pushkey);
+					reqCdPushProc.then(function successCallback(data) {
+						$scope.cdPushProc = (data.response.CD_PUSHPROC === 'Y')?true:false;
+					});
 				} else {
 					// TODO: 에러 처리
 				}
@@ -47,7 +52,9 @@ component('userSetting', {
 					var body = {
 						"DC_ID"  : $scope.userId,
 						"DC_EMIADDR": $scope.DC_EMIADDR,
-						"NO_CEPH": $scope.NO_CEPH
+						"NO_CEPH": $scope.NO_CEPH,
+						"CD_PUSHPROC": ($scope.cdPushProc)?'001':'003',
+						"KEY_TOKEN": $rootScope.pushkey
 					};
 
 					if (!($scope.newPwd == undefined) && !($scope.newPwd === "")) {

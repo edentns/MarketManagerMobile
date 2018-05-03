@@ -5,6 +5,10 @@
         	<input class="form-control input-lg" type="text" placeholder="가입자번호" autocomplete="off" ng-model="bsCd">
             <input class="form-control input-lg" type="text" placeholder="사용자 아이디" autocomplete="off" ng-model="userId">
             <input class="form-control input-lg" type="password" placeholder="패스워드" autocomplete="off" ng-model="password">
+            <input class="form-control input-lg" type="hidden" placeholder="푸쉬키" autocomplete="off" ng-model="token">
+            <input class="form-control input-lg" type="hidden" placeholder="디바이스" autocomplete="off" ng-model="device">
+            <input class="form-control input-lg" type="hidden" placeholder="모델" autocomplete="off" ng-model="model">
+            <input class="form-control input-lg" type="hidden" placeholder="제품" autocomplete="off" ng-model="product">
             <button type="submit" ng-disabled="isDisabled" class="btn btn-primary btn-block btn-lg">로그인</button>
         </form>
         <div>&nbsp;<a href="#!/user-create" ng-click="createUser()">가입하기</a></div>

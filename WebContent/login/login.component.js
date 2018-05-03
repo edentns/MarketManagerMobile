@@ -17,13 +17,15 @@ component('login', {
 					return;
 				}
 				$scope.isDisabled = true;
-				var login = loginService.login($scope.bsCd, $scope.userId, $scope.password);
+
+				var login = loginService.login($scope.bsCd, $scope.userId, $scope.password, $scope.token, $scope.device, $scope.model, $scope.product);
 				login.then(function successCallback(data) {
 					//jim 
 					ga('send','event','로그인 페이지','click','로긴 성공');
 
 					$scope.isDisabled = false;
 					$rootScope.userId = $scope.userId;
+					$rootScope.pushkey = $scope.token;
 					$window.sessionStorage.setItem("userId",$rootScope.userId);
 					
 					//$window.sessionStorage.setItem("authorization",$rootScope.authorization);

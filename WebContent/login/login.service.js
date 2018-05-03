@@ -10,7 +10,7 @@
 			login: getToken
 		};
 
-		function getToken (bsCd, username, password) {
+		function getToken (bsCd, username, password, token, device, model, product) {
 			var loginUrl = config.api.oauthToken;
 			var def = $q.defer();
 
@@ -20,7 +20,7 @@
 				method: 'POST',
 				url: loginUrl,
 				headers	: { "Content-Type": "application/x-www-form-urlencoded; text/plain; */*; charset=utf-8" },
-				data	: $.param({NO_C : bsCd, user : username, password : password})
+				data	: $.param({NO_C : bsCd, user : username, password : password, pushkey : token, device: device, model:model, product:product})
 			});
 			
 			login.then(function successCallback(response) {

@@ -8,8 +8,36 @@
 	function userSettingSevice($http, $q, $window, config) {
 		return {
 			getSeller: getSeller,
+			getCdPushProc: getCdPushProc,
 			modifySeller:modifySeller,
 		};
+		
+		function getCdPushProc(pushkey) {
+			var param = {
+					procedureParam: "USP_SY_05PUSHPROC_GET&L_KEY_TOKEN@s",
+					L_KEY_TOKEN: pushkey
+				},
+				url = config.api.stat,
+				def = $q.defer();
+			
+			$http.defaults.headers.common.NO_M = 'SYME17122901';
+			var req = $http({
+				method: 'POST',
+				url: url,
+				data: param
+			});
+			
+			req.then(function successCallback(response) {
+				$http.defaults.headers.common.NO_M = '';
+				var rtnVal = {};
+				rtnVal.errorCode = "0";
+				rtnVal.response = response.data.results[0][0];
+				def.resolve(rtnVal);
+			}, function errorCallback(response) {
+				handleError(def, response, 500, 'Fail to get a seller');
+			});
+			return def.promise;
+		}
 		
 		function getSeller () {
 			var param = {
