@@ -2,11 +2,14 @@
 
 // Register `userCreate` component, along with its associated controller and template
 angular.
-module('userCreate').
+module('userCreate', ['ui.bootstrap','ngSanitize']).
 component('userCreate', {
 	templateUrl: 'user-create/user-create.template.html',
-	controller: ['$rootScope', '$scope', '$http', '$window', 'commonService', 'userCreateSevice',
-		function UserCreateController($rootScope, $scope, $http, $window, commonService, userCreateSevice) {
+	controller: ['$rootScope', '$scope', '$http', '$window', 'commonService', 
+	             'userCreateSevice', '$uibModal', "$q",
+		function UserCreateController($rootScope, $scope, $http, $window,
+				commonService, userCreateSevice, $uibModal, $q) {
+		
 			var ynChkDup = false;
 			
 			$scope.login = function(){
@@ -196,7 +199,51 @@ component('userCreate', {
                     return false;
                 }
                 
+                else if($scope.YN_TERM === 'N'){
+                	$window.alert("약관에 동의 해셔야 가입이 가능합니다.");
+                	return false;
+                }
+                
 				return true;
+			};
+			
+			/**
+			 * 약관팝업창
+			 */
+			$scope.popCla = function () {
+				var self = this,
+				modalInstance = $uibModal.open({
+					component  : "userTerms",
+	                size        : "sm",
+	                resolve: {
+	                	resData: 
+							function ($q) {
+								var defer   = $q.defer(),
+									resData = {};
+
+								userCreateSevice.selectCla('001').then(function (res) {
+									if(res.status === 200) {
+										resData.DC_CLA001 = res.data;
+										userCreateSevice.selectCla('002').then(function (res) {
+											if(res.status === 200) {
+												resData.DC_CLA002 = res.data;
+												userCreateSevice.selectCla('003').then(function (res) {
+													if(res.status === 200) {
+														resData.DC_CLA003 = res.data;
+														defer.resolve(resData);
+													}
+												});
+											}
+										});
+									}
+								});							
+								return defer.promise;
+							}
+	                }
+				});
+				
+				modalInstance.result.then(function ( result ) {
+	            });
 			};
 		}
 	]

@@ -9,7 +9,8 @@
 		return {
 			createUser : createUser,
 			dupCheckNmC: dupCheckNmC,
-			doChkMe    : doChkMe
+			doChkMe    : doChkMe,
+			selectCla  : selectCla,
 		};
 		
 		function dupCheckNmC(nmC, dcEmiaddr){
@@ -43,6 +44,19 @@
 				url		: config.api.createUser,
 				headers	: { "Content-Type": "application/json; text/plain; */*; charset=utf-8" },
 				data    : userJoinVO
+			});
+		}
+		
+		/**
+		 * 약관조회
+		 * @param {{NM_C:string}} userDataSet
+		 * @returns {*}
+		 */
+		function selectCla (cdClaclft) {
+			return $http({
+				method	: "GET",
+				url		: config.api.selectCla+cdClaclft,
+				headers	: { "Content-Type": "application/x-www-form-urlencoded; text/plain; */*; charset=utf-8" }
 			});
 		}
 	}
