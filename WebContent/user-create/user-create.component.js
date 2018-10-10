@@ -2,7 +2,7 @@
 
 // Register `userCreate` component, along with its associated controller and template
 angular.
-module('userCreate', ['ui.bootstrap','ngSanitize']).
+module('userCreate').
 component('userCreate', {
 	templateUrl: 'user-create/user-create.template.html',
 	controller: ['$rootScope', '$scope', '$http', '$window', 'commonService', 
