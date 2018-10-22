@@ -6,7 +6,7 @@
             auth: {
 				secret: "c2VsbGVydG9vbDpzZWxsZXJ0b29sLXNlY3JldA==",
 			},
-			encrypt : false 
+			encrypt : true 
 		},
 	}
 	var env = envs.prod,
