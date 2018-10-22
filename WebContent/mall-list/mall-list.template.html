@@ -7,7 +7,7 @@
                 <div class="col-xm-6 col-sm-6">
                     <div class="list-group">
                         <a ng-repeat="mall in mallStat" ng-click="moveTo('mall_'+mall.NO_MRK)" href="" class="list-group-item">{{mall.NM_MNGMRK}} ({{mall.DC_MRKID}})<span class="badge">{{mall.total}}</span>
-                        <span class="align-right">{{mall.QT_NEWORD}} / {{mall.QT_INQ}} / {{mall.QT_ECHG + mall.QT_TKBK}} / {{mall.QT_CCL}}</span></a>
+                        <span class="align-right">{{mall.QT_NEWORD}} / {{mall.QT_SHPING}} / {{mall.QT_INQ}} / {{mall.QT_ECHG + mall.QT_TKBK}} / {{mall.QT_CCL}}</span></a>
                     </div>
                 </div>
             </div>
@@ -27,6 +27,10 @@
                                 <tr>
                                     <th>주문</th>
                                     <td>{{mall.QT_NEWORD}}</td>
+                                </tr>
+                                <tr>
+                                    <th>배송중</th>
+                                    <td>{{mall.QT_SHPING}}</td>
                                 </tr>
                                 <tr>
                                     <th>문의</th>
