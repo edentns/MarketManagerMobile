@@ -11,5 +11,6 @@ angular.module('sellorToolApp', [
 	'mallConfig',
 	'userSetting',
 	'userCreate',
-	'userTerms'
+	'userTerms',
+	'orderList'
 ]);

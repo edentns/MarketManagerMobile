@@ -17,6 +17,9 @@
                 <li ng-class="{ active: isActive('#!/malls'), none: noMall()}">
                     <a href="#!/malls">조회하기</a>
                 </li>
+                <li ng-class="{ active: isActive('#!/order-list')}">
+                    <a href="#!/order-list">주문관리</a>
+                </li>
                 <li ng-class="{ active: isActive('#!/mall-config')}">
                     <a href="#!/mall-config">쇼핑몰 설정</a>
                 </li>
@@ -25,9 +28,7 @@
                 </li>
                 <li>
                     <a href="" class="sign-out" ng-click="logout()">Sign Out</a>
-                </li>
-                
-            </ul>
+                </li>                
             </ul>
         </div>
         <!-- /.navbar-collapse -->
