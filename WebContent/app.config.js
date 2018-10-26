@@ -35,8 +35,8 @@ app.config(['$locationProvider' ,'$routeProvider', 'cfpLoadingBarProvider',
       when('/user-create', {
         template:'<user-create></user-create>'
       }).
-      when('/order-list', {
-          template:'<order-list></order-list>'
+      when('/order-list/:noMrk/:nmMrk/:userId', {
+        template:'<order-list></order-list>'
       }).
       otherwise('/login');   
   }

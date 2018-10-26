@@ -17,16 +17,19 @@
                      <div class="well">
                         <table class="table">
                             <caption>
-                                <a href="{{mall.DC_SALEMNGURL}}" class="name" target="_blank"><strong>{{mall.NM_MNGMRK}} ({{mall.DC_MRKID}})<strong></a>
+                                <a href="{{mall.DC_SALEMNGURL}}" class="name" target="_blank"><strong>{{mall.NM_MRK}} ({{mall.DC_MRKID}})<strong></a>
                                 <a href="" ng-click="reloadMallStat(mall.NO_MRK)" ng-disabled="mall.isDisabled"><span class="glyphicon glyphicon-refresh" ng-class="{'warning': hasError(mall.DTS_UPDATE, 3600000), 'glyphicon-refresh-animate': mall.isDisabled, 'disabled': mall.isDisabled}"></span></a>
-                                <a href="{{mall.DC_SALEMNGURL}}" class="name" target="_blank">                                	
-                                	<img src="img/mall-list/mng_link.png" width="65" height="25"/>
+                                <a href="{{mall.DC_SALEMNGURL}}" target="_blank" ng-click="goOpenMrkLink()">    
+                                	<span class="label label-primary">마켓연결​</span>
+                                </a>
+                                <a ng-href="#!/order-list/{{mall.NO_MRK}}/{{mall.NM_MRK}}/{{mall.DC_MRKID}}">
+                                	<span class="label label-primary">상세보기​</span>
                                 </a>
                             </caption>
                             <tbody>
                                 <tr>
                                     <th>주문</th>
-                                    <td>{{mall.QT_NEWORD}}</td>
+                                    <td>{{mall.QT_NEWORD}}</td> 
                                 </tr>
                                 <tr>
                                     <th>배송중</th>

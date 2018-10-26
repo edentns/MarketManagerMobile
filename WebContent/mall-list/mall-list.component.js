@@ -5,8 +5,8 @@ angular.
 module('mallList').
 component('mallList', {
 	templateUrl: 'mall-list/mall-list.template.html',
-	controller: ['$rootScope', '$scope', '$window', '$anchorScroll', '$location', 'commonService', 'mallListService',
-		function MallListController($rootScope, $scope, $window, $anchorScroll, $location, commonService, mallListService ) { 
+	controller: ['$rootScope', '$scope', '$window', '$anchorScroll', '$location', '$routeParams', 'commonService', 'mallListService',
+		function MallListController($rootScope, $scope, $window, $anchorScroll, $location, $routeParams, commonService, mallListService ) { 
 			if (!commonService.init($scope)){
 				return;
 			}
@@ -119,6 +119,10 @@ component('mallList', {
 				}
 				return result;
 			};
+			
+			$scope.goOpenMrkLink = function(){
+				ga('send','event','마켓 리스트 페이지','click','마켓링크 클릭');
+			}
 		}
 	]
 });

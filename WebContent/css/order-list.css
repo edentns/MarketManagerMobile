@@ -1,0 +1,30 @@
+.order-title{
+	font-size:20px;
+}
+
+.order-body{
+	margin-top:3%;
+}
+
+.order-subtitle{
+	display:inline-block; 
+	width:40%;
+}
+
+.order-subtitle-btn{
+	display:inline-block; 
+	text-align:right; 
+	width:58%;
+}
+
+.order-list-div {
+	height:233px;
+}
+
+.order-list {
+	
+}
+
+.order-list-none td{
+	border-bottom:solid white;
+}

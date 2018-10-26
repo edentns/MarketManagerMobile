@@ -1,7 +1,6 @@
 (function() {
 'use strict';
-	angular
-		.module('mallList')
+	angular.module('mallList')
 		.factory('mallListService', mallListService);
 
 	mallListService.$inject = ['$http', '$q', '$window', 'config'];

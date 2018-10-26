@@ -29,7 +29,8 @@
 				user       : env.root + '/userMb',
 				sy09MrkCons: env.root + '/sy09MrkCons',
 				mo01MallList: env.root + '/mo01MallList',
-				selectCla : env.root + '/selectCla?L_CD_CLA='
+				selectCla : env.root + '/selectCla?L_CD_CLA=',
+				orderList : env.root + '/ordall/ordlist?'
 			},
             auth: env.auth,
             encrypt : env.encrypt,
