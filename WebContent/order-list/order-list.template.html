@@ -14,8 +14,9 @@
   				</div>  			
   				<!-- select box -->
   				<div class="panel-body">
-					<select class="form-control">
-						<option>신규주문</option>
+					<select class="form-control" data-ng-model="orderList.selectedVal"
+												 data-ng-change="ordOnChange()" 
+												 data-ng-options="ord.nm for ord in orderList.selectedOptions track by ord.nm">								 
 					</select>
 				</div>
 				<!-- table -->
@@ -29,6 +30,9 @@
 								</th>
 								<th class="text-center">
 									상품명 
+								</th>
+								<th class="text-center">
+									주문상태 
 								</th>
 								<th class="text-center">
 									상품가격
@@ -48,6 +52,7 @@
 							<tr data-ng-repeat="param in orderList.filtereDlist">
 								<td class="text-center"> {{param.rownum}}</td>
 								<td>{{param.NM_MRKITEM}}</td>
+								<td>{{param.NM_ORDSTAT}}</td>
 								<td class="text-center">{{param.AM_ORDSALEPRC | currency:"&#8361;":0}} </td>
 								<td class="text-center">{{param.NM_PCHR}}</td>
 								<td class="text-right">{{param.QT_ORD}}</td>
@@ -66,6 +71,9 @@
 									상품명 
 								</th>
 								<th class="text-center">
+									주문상태 
+								</th>
+								<th class="text-center">
 									상품가격
 								</th>	
 								<th class="text-center">
@@ -81,13 +89,13 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td colspan="6">&nbsp;</td>
+								<td colspan="7">&nbsp;</td>
 							</tr>
 							<tr>
-								<td colspan="6">&nbsp;</td>
+								<td colspan="7">&nbsp;</td>
 							</tr>
 							<tr>
-								<td class="text-center" colspan="6"> 조회된 주문이 없습니다. </td>
+								<td class="text-center" colspan="7"> 조회된 주문이 없습니다. </td>
 							</tr>
 						</tbody>
 					</table>

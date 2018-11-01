@@ -36,6 +36,7 @@ component('mallList', {
 						$scope.mallStat[i].isDisabled = false;
 						$scope.mallStat[i].total = $scope.mallStat[i].QT_NEWORD + $scope.mallStat[i].QT_INQ  + 
 						                           $scope.mallStat[i].QT_ECHG   + $scope.mallStat[i].QT_TKBK + 
+						                           $scope.mallStat[i].QT_SHPING + $scope.mallStat[i].QT_SHPRDY + 
 						                           $scope.mallStat[i].QT_CCL;
 					}
 				} else {
@@ -79,6 +80,10 @@ component('mallList', {
 							$scope.mallStat[index].QT_ECHG       = data.response.exchangeorder*1;
 							$scope.mallStat[index].QT_TKBK       = data.response.returnsorder*1;
 							$scope.mallStat[index].QT_CCL        = data.response.cancelorder*1;
+							
+							$scope.mallStat[index].QT_SHPING     = data.response.itemdelivery*1; 	//상품배송
+							$scope.mallStat[index].QT_SHPRDY     = data.response.itemprepare*1;		//상품준비	
+							
 							$scope.mallStat[index].DTS_UPDATE    = [updateDt.getFullYear(), month, day].join('-') + ' ' + [hour, min].join(':');
 							$scope.mallStat[index].total = $scope.mallStat[index].QT_NEWORD + $scope.mallStat[index].QT_INQ  + 
 							                               $scope.mallStat[index].QT_ECHG   + $scope.mallStat[index].QT_TKBK + 
