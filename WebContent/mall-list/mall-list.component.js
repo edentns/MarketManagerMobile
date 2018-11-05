@@ -87,6 +87,7 @@ component('mallList', {
 							$scope.mallStat[index].DTS_UPDATE    = [updateDt.getFullYear(), month, day].join('-') + ' ' + [hour, min].join(':');
 							$scope.mallStat[index].total = $scope.mallStat[index].QT_NEWORD + $scope.mallStat[index].QT_INQ  + 
 							                               $scope.mallStat[index].QT_ECHG   + $scope.mallStat[index].QT_TKBK + 
+								                           $scope.mallStat[i].QT_SHPING + $scope.mallStat[i].QT_SHPRDY + 
 							                               $scope.mallStat[index].QT_CCL;
 							
 							$window.alert("정보를 조회하였습니다.");
