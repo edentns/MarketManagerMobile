@@ -1,0 +1,8 @@
+.list-ellipsis{
+	width: 45%;
+	overflow: hidden;
+	white-space: nowrap;
+	display: inline-block;
+  	text-overflow: ellipsis;
+	position: relative;
+}

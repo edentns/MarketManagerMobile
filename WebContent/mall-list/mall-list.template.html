@@ -6,7 +6,11 @@
                 <h1><span ng-show="mallStat.length > 0">{{mallStat.length}} </span>Mall(s)</h1>
                 <div class="col-xm-6 col-sm-6">
                     <div class="list-group">
-                        <a ng-repeat="mall in mallStat" ng-click="moveTo('mall_'+mall.NO_MRK)" href="" class="list-group-item">{{mall.NM_MNGMRK}} ({{mall.DC_MRKID}})<span class="badge">{{mall.total}}</span>
+                        <a ng-repeat="mall in mallStat" ng-click="moveTo('mall_'+mall.NO_MRK)" href="" class="list-group-item">
+                        	<div class="list-ellipsis">
+                        		{{mall.NM_MNGMRK}} ({{mall.DC_MRKID}})
+                        	</div>                        	
+                        	<span class="badge">{{mall.total}}</span>
                         <span class="align-right">{{mall.QT_NEWORD}} / {{mall.QT_SHPRDY}} / {{mall.QT_SHPING}} / {{mall.QT_INQ}} / {{mall.QT_ECHG + mall.QT_TKBK}} / {{mall.QT_CCL}}</span></a>
                     </div>
                 </div>
