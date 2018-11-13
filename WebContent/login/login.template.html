@@ -15,6 +15,11 @@
             <input class="form-control input-lg" type="hidden" placeholder="디바이스" autocomplete="off" ng-model="device">
             <input class="form-control input-lg" type="hidden" placeholder="모델" autocomplete="off" ng-model="model">
             <input class="form-control input-lg" type="hidden" placeholder="제품" autocomplete="off" ng-model="product">
+            <div class="checkbox">
+				<label>
+			    	<input type="checkbox" data-ng-model="chkLogin" data-ng-click="isLogin()"> 아이디 저장
+			    </label>
+		    </div>
             <button type="submit" ng-disabled="isDisabled" class="btn btn-primary btn-block btn-lg">로그인</button>
         </form>
         <div>&nbsp;<a href="#!/user-create" ng-click="createUser()">가입하기</a></div>

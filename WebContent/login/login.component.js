@@ -11,7 +11,10 @@ component('login', {
 				$window.location.href = "#!/malls";
 				return;
 			}
+			
 			$scope.isDisabled = false;
+			$scope.chkLogin = false;
+			
 			$scope.login = function() {
 				if (checkLoginFields() == false) {
 					return;
@@ -46,6 +49,16 @@ component('login', {
 				ga('send','event','로그인 페이지','click','GooglePlay 이동');
 				return true;
 			};
+			
+			$scope.isLogin = function(){
+				if ($scope.chkLogin) {
+					$window.localStorage.setItem("recentMobLoginInfo", JSON.stringify({bsCd: $scope.bsCd, userId : $scope.userId}));
+				}
+				else {
+		            $window.localStorage.removeItem("recentMobLoginInfo");
+				}
+			}
+			
 			// Login 하기 전에 유효성 검증
 			var checkLoginFields = function() {
 				if ($scope.bsCd == undefined || $scope.bsCd === "") {
@@ -63,6 +76,19 @@ component('login', {
 					return false;
 				}
 			};
+			
+			var init = function(){
+				var	recentLoginInfo = $window.localStorage.getItem("recentMobLoginInfo"); // 기억한 로그인 정보
+			
+				if (recentLoginInfo) {
+					recentLoginInfo    = JSON.parse(recentLoginInfo);
+					$scope.bsCd = recentLoginInfo.bsCd; 
+					$scope.userId = recentLoginInfo.userId;
+					$scope.chkLogin  = true;
+				}
+			}
+			
+			init();
 		}
 	]
 });
