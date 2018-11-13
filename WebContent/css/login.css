@@ -22,3 +22,13 @@
 .login-page a:hover {
   text-decoration: none;
 }
+
+.login-checkbox{
+	 margin-bottom: 30px;
+}
+
+.login-checkbox span{	  
+	 margin-left: 3px; 
+	 font-size: 14px;
+	 font-weight : normal;
+}
