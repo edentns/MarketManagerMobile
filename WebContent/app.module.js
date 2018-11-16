@@ -12,5 +12,6 @@ angular.module('sellorToolApp', [
 	'userSetting',
 	'userCreate',
 	'userTerms',
+	'userTermsPage',
 	'orderList'
 ]);
