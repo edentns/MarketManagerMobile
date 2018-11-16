@@ -5,12 +5,12 @@ angular.
 module('login').
 component('login', {
 	templateUrl: 'login/login.template.html',
-	controller: ['$rootScope', '$scope', '$window', 'commonService', 'loginService',
-		function LoginController($rootScope, $scope,  $window, commonService, loginService) {
+	controller: ['$rootScope', '$scope', '$window', '$timeout','commonService', 'loginService',
+		function LoginController($rootScope, $scope,  $window, $timeout, commonService, loginService) {
 			if (commonService.isLogin()) {
 				$window.location.href = "#!/malls";
 				return;
-			}
+			}		
 			
 			$scope.isDisabled = false;
 			$scope.chkLogin = false;
@@ -54,8 +54,8 @@ component('login', {
 				if ($scope.chkLogin) {
 					$window.localStorage.setItem("recentMobLoginInfo", JSON.stringify({bsCd: $scope.bsCd, userId : $scope.userId}));
 				}
-				else {
-		            $window.localStorage.removeItem("recentMobLoginInfo");
+				else {				
+			        $window.localStorage.removeItem("recentMobLoginInfo");
 				}
 			}
 			
@@ -78,7 +78,7 @@ component('login', {
 			};
 			
 			var init = function(){
-				var	recentLoginInfo = $window.localStorage.getItem("recentMobLoginInfo"); // 기억한 로그인 정보
+				var	recentLoginInfo = $window.localStorage.getItem("recentMobLoginInfo");
 			
 				if (recentLoginInfo) {
 					recentLoginInfo    = JSON.parse(recentLoginInfo);
@@ -88,7 +88,9 @@ component('login', {
 				}
 			}
 			
-			init();
+			$timeout(function(){
+				init();
+			},500);
 		}
 	]
 });
