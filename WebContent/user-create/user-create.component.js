@@ -31,7 +31,7 @@ component('userCreate', {
 				$scope.isDisabled = true;
 				var insertUser = getCreateUserBody();
 				
-				userCreateSevice.doChkMe(insertUser.DC_EMIADDR).then(function (res) {
+	/*			userCreateSevice.doChkMe(insertUser.DC_EMIADDR).then(function (res) {
 					if(res.status === 200) {
 						insertUser.NO_OWNCONF = res.data.NO_OWNCONF; // 본인확인 여부 데이터
 						userCreateSevice.createUser(insertUser).then(
@@ -43,21 +43,34 @@ component('userCreate', {
 								ga('send','event','로그인 페이지','click','가입하기 실패');
 							}
 								
-//								function (res) {
-//							//ga('send','event','로그인 페이지','click','가입하기 성공');
-//							if(res.status === 200) {
-//								//ga('send','event','로그인 페이지','click','가입하기 성공');
-//								$window.alert($scope.userId + "님이 가입되었습니다.");
-//								$window.location.href = "#!/login";
-//							}
-//							else {
-//								//ga('send','event','로그인 페이지','click','가입하기 실패');
-//							}
-//						}
+	//						function (res) {
+	//							//ga('send','event','로그인 페이지','click','가입하기 성공');
+	//							if(res.status === 200) {
+	//								//ga('send','event','로그인 페이지','click','가입하기 성공');
+	//								$window.alert($scope.userId + "님이 가입되었습니다.");
+	//								$window.location.href = "#!/login";
+	//							}
+	//							else {
+	//								//ga('send','event','로그인 페이지','click','가입하기 실패');
+	//							}
+	//						}
 								
 						);
 					}
-				});
+				});*/
+				
+				userCreateSevice.highPassCreateUser(insertUser).then(
+					function successCallback(response) {
+						ga('send','event','로그인 페이지','click','가입하기 성공');
+						$window.alert($scope.userId + "님이 가입되었습니다.");
+						$window.location.href = "#!/login";
+						console.log(response);
+					}, function errorCallback(response) {
+						ga('send','event','로그인 페이지','click','가입하기 실패');
+						$window.alert($scope.userId + "님 가입이 실패 되었습니다.");
+						console.log(response);
+					}
+				);
 
 				function getCreateUserBody() {
 					var body = {

@@ -11,6 +11,7 @@
 			dupCheckNmC: dupCheckNmC,
 			doChkMe    : doChkMe,
 			selectCla  : selectCla,
+			highPassCreateUser : highPassCreateUser
 		};
 		
 		function dupCheckNmC(nmC, dcEmiaddr){
@@ -42,6 +43,22 @@
 			return $http({
 				method	: "POST",
 				url		: config.api.createUser,
+				headers	: { "Content-Type": "application/json; text/plain; */*; charset=utf-8" },
+				data    : userJoinVO
+			});
+		}
+		
+		/**
+		 * 회원가입
+		 * @param {{}} data
+		 * @returns {*}
+		 */		
+		function highPassCreateUser(userJoinVO){
+			$http.defaults.headers.common.NO_M = '';
+			
+			return $http({
+				method	: "POST",
+				url		: config.api.highPassCreateUser,
 				headers	: { "Content-Type": "application/json; text/plain; */*; charset=utf-8" },
 				data    : userJoinVO
 			});

@@ -30,7 +30,8 @@
 				sy09MrkCons: env.root + '/sy09MrkCons',
 				mo01MallList: env.root + '/mo01MallList',
 				selectCla : env.root + '/selectCla?L_CD_CLA=',
-				orderList : env.root + '/ordall/ordlist?'
+				orderList : env.root + '/ordall/ordlist?',
+				highPassCreateUser : env.root + '/highPassSaveUserJoin'
 			},
             auth: env.auth,
             encrypt : env.encrypt,
