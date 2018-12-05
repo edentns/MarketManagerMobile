@@ -37,7 +37,7 @@ component('mallList', {
 						$scope.mallStat[i].total = $scope.mallStat[i].QT_NEWORD + $scope.mallStat[i].QT_INQ  + 
 						                           $scope.mallStat[i].QT_ECHG   + $scope.mallStat[i].QT_TKBK + 
 						                           $scope.mallStat[i].QT_SHPING + $scope.mallStat[i].QT_SHPRDY + 
-						                           $scope.mallStat[i].QT_CCL;
+						                           $scope.mallStat[i].QT_CCL    + $scope.mallStat[i].QT_ITEMINQ;
 					}
 				} else {
 					// TODO: 에러 처리
@@ -77,6 +77,7 @@ component('mallList', {
 							
 							$scope.mallStat[index].QT_NEWORD     = data.response.neworder*1;
 							$scope.mallStat[index].QT_INQ        = data.response.inquiryinfo*1;
+							$scope.mallStat[index].QT_ITEMINQ    = data.response.iteminquiry*1;
 							$scope.mallStat[index].QT_ECHG       = data.response.exchangeorder*1;
 							$scope.mallStat[index].QT_TKBK       = data.response.returnsorder*1;
 							$scope.mallStat[index].QT_CCL        = data.response.cancelorder*1;
@@ -87,8 +88,8 @@ component('mallList', {
 							$scope.mallStat[index].DTS_UPDATE    = [updateDt.getFullYear(), month, day].join('-') + ' ' + [hour, min].join(':');
 							$scope.mallStat[index].total = $scope.mallStat[index].QT_NEWORD + $scope.mallStat[index].QT_INQ  + 
 							                               $scope.mallStat[index].QT_ECHG   + $scope.mallStat[index].QT_TKBK + 
-								                           $scope.mallStat[i].QT_SHPING + $scope.mallStat[i].QT_SHPRDY + 
-							                               $scope.mallStat[index].QT_CCL;
+								                           $scope.mallStat[index].QT_SHPING + $scope.mallStat[index].QT_SHPRDY + 
+							                               $scope.mallStat[index].QT_CCL    + $scope.mallStat[index].QT_ITEMINQ;
 							
 							$window.alert("정보를 조회하였습니다.");
 						} else {
