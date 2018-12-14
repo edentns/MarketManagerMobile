@@ -31,7 +31,8 @@
 				mo01MallList: env.root + '/mo01MallList',
 				selectCla : env.root + '/selectCla?L_CD_CLA=',
 				orderList : env.root + '/ordall/ordlist?',
-				highPassCreateUser : env.root + '/highPassSaveUserJoin'
+				highPassCreateUser : env.root + '/highPassSaveUserJoin',
+				orderConfirm : env.root + '/ord/confirm' 
 			},
             auth: env.auth,
             encrypt : env.encrypt,

@@ -1,16 +1,33 @@
 <div>
     <div ng-include="'template/header.html'"></div>
-    <section>
-    	<p class="text-center order-title"> 상세 주문 </p>
+    <section>    	
+    	<div class="header-title">    		
+			<span class="text-center order-title"> 상세 주문 </span>
+			<div class="order-subtitle-btn">
+				<a class="btn btn-info" ng-href="#!/malls" role="button">목록으로</a>	
+    		</div>  					
+		</div>
+		
         <div class="container order-body">
 			<div class="panel panel-default">
-  				<div class="panel-heading">
-  					<div class="order-subtitle">
-  						<b>{{orderList.nmMrk}} ({{orderList.userId}})</b>  					
+  				<div class="panel-heading custom-panel">
+  					<div class="order-subtitle">  						  						
+  						<span class="market-title"><b>{{orderList.nmMrk}} ({{orderList.userId}}, 총 {{orderList.lisTsize}}건)</b></span>				
   					</div>
-  					<div class="order-subtitle-btn">
-  						<a class="btn btn-default" ng-href="#!/malls" role="button">조회 목록으로</a>  					
-  					</div>
+  					<div class="order-btn" data-ng-switch on="orderList.ordStatForBtn">
+	  					<div ng-switch-when="001">
+							<a class="btn btn-default" role="button" data-ng-click="orderConfirm()">확정</a>
+							<!-- <a class="btn btn-default" role="button" data-ng-click="orderCancel()">취소</a> -->
+			    		</div> 
+			    		<div ng-switch-when="002">
+							<!-- <a class="btn btn-default" role="button">배송듣록</a> -->
+							<!-- <a class="btn btn-default" role="button">취소</a> -->	
+			    		</div> 
+			    		<div ng-switch-when="004">
+							<!-- <a class="btn btn-default" role="button">배송정보수정</a> -->
+							<!-- <a class="btn btn-default" role="button">판매자반품신청</a> -->	
+			    		</div>  
+  					</div>  					
   				</div>  			
   				<!-- select box -->
   				<div class="panel-body">
@@ -24,7 +41,9 @@
   					<!-- 데이터가 있을때 -->
 					<table class="table table-striped order-list" ng-if="orderList.list.length > 0">
 						<thead>
-							<tr>
+							<tr>	
+								<th class="text-center">									
+								</th>
 								<th class="text-center">
 									#
 								</th>
@@ -49,10 +68,13 @@
 							</tr>								
 						</thead>
 						<tbody>
-							<tr data-ng-repeat="param in orderList.filtereDlist">
+							<tr data-ng-repeat="param in orderList.filtereDlist" data-ng-class="param.hoverClass">
+								<td class="text-center"> 
+									<label><input type="checkbox" ng-change="chkOnChange(param)" ng-model="param.ROW_CHK"></label>
+								</td>
 								<td class="text-center"> {{param.rownum}}</td>
 								<td>{{param.NM_MRKITEM}}</td>
-								<td>{{param.NM_ORDSTAT}}</td>
+								<td>{{param.NM_ORDSTAT}} <span data-ng-if="param.CD_CCLSTAT"> <br/>({{param.CD_CCLSTAT}})</span></td>
 								<td class="text-center">{{param.AM_ORDSALEPRC | currency:"&#8361;":0}} </td>
 								<td class="text-center">{{param.NM_PCHR}}</td>
 								<td class="text-right">{{param.QT_ORD}}</td>
@@ -65,6 +87,9 @@
 						<thead>
 							<tr>
 								<th class="text-center">
+									
+								</th>
+								<th class="text-center">
 									#
 								</th>
 								<th class="text-center">
@@ -89,13 +114,13 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td colspan="7">&nbsp;</td>
+								<td colspan="8">&nbsp;</td>
 							</tr>
 							<tr>
-								<td colspan="7">&nbsp;</td>
+								<td colspan="8">&nbsp;</td>
 							</tr>
 							<tr>
-								<td class="text-center" colspan="7"> 조회된 주문이 없습니다. </td>
+								<td class="text-center" colspan="8"> 조회된 주문이 없습니다. </td>
 							</tr>
 						</tbody>
 					</table>
@@ -107,12 +132,12 @@
     						ng-model="orderList.currentPage"     						
 					 		max-size="orderList.maxSize"  
     						items-per-page="orderList.numPerPage"    						
-    						class="pagination-sm"    						
+    						class="pagination-sm custom-pager"    						
     						previous-text="&lsaquo;"
     						next-text="&rsaquo;" 
     						first-text="&laquo;" 
     						last-text="&raquo;">
-    				</ul>    				
+    				</ul>    			
   				</div>
 			</div>	
         </div>
