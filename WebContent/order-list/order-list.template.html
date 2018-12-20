@@ -70,7 +70,7 @@
 						<tbody>
 							<tr data-ng-repeat="param in orderList.filtereDlist" data-ng-class="param.hoverClass">
 								<td class="text-center"> 
-									<label><input type="checkbox" ng-change="chkOnChange(param)" ng-model="param.ROW_CHK"></label>
+									<label data-ng-if="param.CD_ORDSTAT ==='001'"><input type="checkbox" ng-change="chkOnChange(param)" ng-model="param.ROW_CHK"></label>
 								</td>
 								<td class="text-center"> {{param.rownum}}</td>
 								<td>{{param.NM_MRKITEM}}</td>

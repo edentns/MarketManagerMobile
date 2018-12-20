@@ -22,17 +22,15 @@ component('orderList', {
                 currentPage : 1,
                 numPerPage : 5,
                 selectedOptions : [
-                	/*{ nm : '전체', val : '001,002,004,006,007,008'},*/
-                	{ nm : '전체', val : '001,002,004,006'},
+                	{ nm : '전체', val : '001,002,004,006,007,008'},                	
                 	{ nm : '신규주문', val : '001'},
                 	{ nm : '상품준비중', val : '002'},
                 	{ nm : '배송중', val : '004'},
-                	{ nm : '주문취소', val : '006'}/*,
+                	{ nm : '주문취소', val : '006'},
                 	{ nm : '반품', val : '007'},
-                	{ nm : '교환', val : '008'}*/
+                	{ nm : '교환', val : '008'}
                 ],
-                /*selectedVal : { nm : '전체', val : '001,002,004,006,007,008'}*/
-                selectedVal : { nm : '전체', val : '001,002,004,006'}
+                selectedVal : { nm : '전체', val : '001,002,004,006,007,008'}                
 			}
 						
 			var initLoad = function () {
