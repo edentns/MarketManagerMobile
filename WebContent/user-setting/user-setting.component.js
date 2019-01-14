@@ -20,7 +20,10 @@ component('userSetting', {
 					
 					var reqCdPushProc = userSettingSevice.getCdPushProc($rootScope.pushkey);
 					reqCdPushProc.then(function successCallback(data) {
-						$scope.cdPushProc = (data.response.CD_PUSHPROC === 'Y')?true:false;
+						var res = data.response;
+						if(res){
+							$scope.cdPushProc = (res.CD_PUSHPROC === 'Y') ? true : false;	
+						}
 					});
 				} else {
 					// TODO: 에러 처리
