@@ -48,6 +48,9 @@
 									#
 								</th>
 								<th class="text-center">
+									주문번호 
+								</th>
+								<th class="text-center">
 									상품명 
 								</th>
 								<th class="text-center">
@@ -73,8 +76,11 @@
 									<label data-ng-if="param.CD_ORDSTAT ==='001'"><input type="checkbox" ng-change="chkOnChange(param)" ng-model="param.ROW_CHK"></label>
 								</td>
 								<td class="text-center"> {{param.rownum}}</td>
+								<td>{{param.NO_ORD}}</td>
 								<td>{{param.NM_MRKITEM}}</td>
-								<td>{{param.NM_ORDSTAT}} <span data-ng-if="param.CD_CCLSTAT"> <br/>({{param.CD_CCLSTAT}})</span></td>
+								<td>{{param.NM_ORDSTAT}} 
+									<span data-ng-if="param.OTHER_ORDSTAT"> <br/>({{param.OTHER_ORDSTAT}})</span>
+								</td>
 								<td class="text-center">{{param.AM_ORDSALEPRC | currency:"&#8361;":0}} </td>
 								<td class="text-center">{{param.NM_PCHR}}</td>
 								<td class="text-right">{{param.QT_ORD}}</td>
@@ -91,6 +97,9 @@
 								</th>
 								<th class="text-center">
 									#
+								</th>
+								<th class="text-center">
+									주문번호 
 								</th>
 								<th class="text-center">
 									상품명 

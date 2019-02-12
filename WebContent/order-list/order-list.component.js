@@ -22,15 +22,15 @@ component('orderList', {
                 currentPage : 1,
                 numPerPage : 5,
                 selectedOptions : [
-                	{ nm : '전체', val : '001,002,004,006,007,008'},                	
+                	{ nm : '전체', val : '001,002,004,005'},                	
                 	{ nm : '신규주문', val : '001'},
                 	{ nm : '상품준비중', val : '002'},
                 	{ nm : '배송중', val : '004'},
-                	{ nm : '주문취소', val : '006'},
-                	{ nm : '반품', val : '007'},
-                	{ nm : '교환', val : '008'}
+                	{ nm : '취소요청', val : '001'},
+                	{ nm : '반품요청', val : '004,005'},
+                	{ nm : '교환요청', val : '004,005'}
                 ],
-                selectedVal : { nm : '전체', val : '001,002,004,006,007,008'}                
+                selectedVal : { nm : '전체', val : '001,002,004,005'}                
 			}
 						
 			var initLoad = function () {
@@ -40,7 +40,7 @@ component('orderList', {
             	var ordParam = {
     				NM_MRKITEM : '',
 				    NO_MRK : sParam.noMrk, 
-				    CD_ORDSTAT : local.selectedVal.val,   
+				    CD_ORDSTAT : local.selectedVal.val,
 				    NO_MRKORD : '',
     				NM_PCHR : '',
 				    DTS_CHK : '003',  
@@ -53,25 +53,16 @@ component('orderList', {
             				return res.data;
         				}
         			})
-                ]).then(function (result) {
-                	var	tempList = [];
-                	
-                	local.list = result[0];
-                	local.lisTsize = result[0].length;
-                	                	
-                	//순번 넣으려구 하드코딩을 함, db에서 해두 되는데 그냥 싫음
-                	for(var i=0; i<local.lisTsize; i++){
-                		tempList.push(angular.extend({rownum:i+1},local.list[i]));
-                	}
-                	
-                	local.list = tempList;                	
+                ]).then(function (result) {                	
+        			local.list = orderListSevice.fncList(result[0], orderList);         
+        			local.lisTsize = local.list.length;
                 	local.nmMrk = sParam.nmMrk;  
                 	local.userId = sParam.userId;  
                 	                  	
                     //local.currentPage = 1;
                     //local.numPerPage = 5;
                 	
-                	pagerEvt();
+                	pagerEvt(); 
                 	
 					ga('send','event','상세조회 페이지','click','상세 조회('+local.selectedVal.nm+')');
                 });
@@ -110,15 +101,15 @@ component('orderList', {
             $scope.chkOnChange = function(param){
             	orderListSevice.chkOnChange(orderList ,param);
             };
-            
+            //주문확정
             $scope.orderConfirm = function(){
             	var local = orderList;
-            	var willSendConfirmListSize = orderList.chkedDList.length; 
-            	var param = orderList.chkedDList;            	
+            	var willSendConfirmListSize = local.chkedDList.length; 
+            	var param = local.chkedDList;            	
             	var tmpCclChk = [];
             	
             	tmpCclChk = param.filter(function(item){
-            		if(item.CD_CCLSTAT){
+            		if(item.OTHER_ORDSTAT === "취소요청"){
             			return item;
             		}
             	});
@@ -147,11 +138,11 @@ component('orderList', {
         			})
             	}
             };
-            
+            //주문취소
             $scope.orderCancel= function(){
             	var local = orderList;
-            	var willSendCclListSize = orderList.chkedDList.length; 
-            	var param = orderList.chkedDList;
+            	var willSendCclListSize = local.chkedDList.length; 
+            	var param = local.chkedDList;
             	
             	if(willSendCclListSize > 1){
             		alert("주문취소는 한건씩만 처리할 수 있습니다.");

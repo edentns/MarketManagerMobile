@@ -9,7 +9,8 @@
 		return {
 			orderList : orderList,
 			chkOnChange : chkOnChange,
-			orderConfirm : orderConfirm
+			orderConfirm : orderConfirm,
+			fncList : fncList
 		};
 				
     	/**
@@ -79,6 +80,34 @@
 				}
         	}
 			//$log.info("list = ",self.chkedDList);
+    	}
+    	
+    	//순번 넣으려구 하드코딩을 함, db에서 해두 되는데 그냥 싫음  , 취소요청, 반품요청, 교환요청 데이터만 추려내려는 로직
+    	function fncList(list, localModel){
+    		var sltdValNm = localModel.selectedVal.nm,
+    			rtnList = [];
+    			    	
+	    	if(sltdValNm === "취소요청"){
+	    		list = list.filter(function(param){
+	    			return param.OTHER_ORDSTAT === "취소요청";
+	    		});
+			}
+			else if(sltdValNm === "반품요청"){
+				list = list.filter(function(param){
+	    			return param.OTHER_ORDSTAT === "반품요청";
+	    		});
+			}
+			else if(sltdValNm === "교환요청"){
+				list = list.filter(function(param){
+	    			return param.OTHER_ORDSTAT === "교환요청";
+	    		});
+			}
+	    	
+			for(var i=0; i<list.length; i++){
+				rtnList.push(angular.extend({rownum:i+1}, list[i]));
+			}
+			
+			return rtnList;
     	}
 	}
 })();
