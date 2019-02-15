@@ -65,8 +65,19 @@
                             </caption>
                             <tbody>
                                 <tr>
-                                    <td>{{mall.CD_ITLSTAT === '002' ? "연결 가능" : "연결 불가"}} ({{short2date(mall.DT_ITLSTART)}})</td>
+                                    <td>
+                                    	<span data-ng-switch="mall.CD_ITLSTAT">
+                                    		<span data-ng-switch-when="001">미연동</span>
+                                    		<span data-ng-switch-when="002">연동성공</span>
+                                    		<span data-ng-switch-default>연동실패</span>
+                                    	</span>({{short2date(mall.DT_ITLSTART)}})
+                                    </td>                                    
                                     <!-- <td>"연결 가능" ({{long2date(mall.updatedTime)}})</td> -->
+                                </tr>
+                                <tr data-ng-if="mall.CD_ITLSTAT === '003'">
+                                	<td>
+                                    	실패 사유 : {{mall.MSG_ITLSTAT}}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>
