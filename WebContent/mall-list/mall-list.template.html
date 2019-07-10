@@ -29,6 +29,9 @@
                                 <a data-ng-href="#!/order-list/{{mall.NO_MRK}}/{{mall.NM_MRK}}/{{mall.DC_MRKID}}">
                                 	<span class="label label-primary">상세보기​</span>
                                 </a>
+                                <a data-ng-if="mall.CD_ITLSTAT == '003'" data-ng-href="#!/order-list/{{mall.NO_MRK}}/{{mall.NM_MRK}}/{{mall.DC_MRKID}}">
+                                	<span class="label label-primary">연동설정​</span>
+                                </a>
                             </caption>
                             <tbody>
                                 <tr>
