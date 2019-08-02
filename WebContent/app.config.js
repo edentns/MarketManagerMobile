@@ -44,6 +44,21 @@ app.config(['$locationProvider' ,'$routeProvider', 'cfpLoadingBarProvider',
       when('/order-list/:noMrk/:nmMrk/:userId', {
         template:'<order-list></order-list>'
       }).
-      otherwise('/login');   
+      when('/notice-list', {
+          template:'<notice-list></notice-list>'
+      }).
+      when('/notice-info/:kind/:no', {
+          template:'<notice-info></notice-info>'
+      }).
+      when('/user-qna-info', {
+          template:'<user-qna-info></user-qna-info>'
+      }).
+      when('/user-qna-list', {
+          template:'<user-qna-list></user-qna-list>'
+      }).
+      when('/user-qna-write', {
+          template:'<user-qna-write></user-qna-write>'
+      }).
+      otherwise('/login');
 	}
 ]);

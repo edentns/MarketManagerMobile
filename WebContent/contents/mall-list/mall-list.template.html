@@ -1,0 +1,155 @@
+<div id="top">
+    <div data-ng-include="'template/header.html'"></div>
+    <section>
+        <div class="container"> <!-- If Needed Left and Right Padding in 'md' and 'lg' screen means use container class -->
+        	<div class="row hidden-lg hidden-xl hidden-md">
+        		<div class="col-xm-6 col-sm-6">        			                    
+                    <div class="input-group" data-ng-if="$index === 0 && param.CD_NOTICE == '002'" data-ng-repeat="param in importantNotice" >
+					    <span class="input-group-addon" data-ng-if="param.CD_NOTICE == '002'">					    	
+					    	<span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>					    	
+					    </span>					    
+					    <span class="form-control">
+					    	<a data-ng-href="#!/notice-info/{{param.CD_NOTICE}}/{{param.NO_NOTICE}}">
+								<marquee> <span data-ng-if="param.NO_C != null && param.NO_C != ''">[개별공지]</span>{{param.NM_SUBJECT}} / {{param.DTS_INSERT}} </marquee>
+							</a>					    	
+					    </span>					    
+  						<span id="inputGroupSuccess1Status" class="sr-only">(success)</span>
+				  	</div>
+        		</div>
+        	</div>        	       	
+        	<!-- 마켓별 요약 카운팅  -->
+            <div class="row hidden-lg hidden-xl hidden-md">
+            	<div class="col-xm-6 col-sm-6">
+                	<h1><span data-ng-show="mallStat.length > 0">{{mallStat.length}} </span>Mall(s)</h1>
+                </div>
+                <div class="col-xm-6 col-sm-6">
+                    <div class="list-group">
+                        <div data-ng-repeat="mall in mallStat" data-ng-click="moveTo('mall_'+mall.NO_MRK)" class="list-group-item">
+                        	<div class="list-ellipsis">
+                        		{{mall.NM_MNGMRK}} ({{mall.DC_MRKID}})
+                        	</div>                        	
+                        	<span class="badge">{{mall.total}}</span>
+                        	<span class="align-right">{{mall.QT_NEWORD}} / {{mall.QT_SHPRDY}} / {{mall.QT_SHPING}} / {{mall.QT_INQ + mall.QT_ITEMINQ}} / {{mall.QT_ECHG + mall.QT_TKBK}} / {{mall.QT_CCL}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="hidden-lg hidden-xl hidden-md" />
+                        
+            <!-- 공지사항 -->
+            <div class="row hidden-lg hidden-xl hidden-md">
+	       		<div class="col-xm-6 col-sm-6">	 
+					<div class="panel panel-info" data-ng-if="notice.length > 0">
+					  	<!-- Default panel contents -->
+					  	<div class="panel-heading"><h4> <a href="#!/notice-list">공지사항 > </a> </h4></div>
+											
+						<div class="list-group">
+							<a href="#!/notice-info/{{param.CD_NOTICE}}/{{param.NO_NOTICE}}" class="list-group-item" data-ng-repeat="param in notice" data-ng-if="$index < 2">
+						  		<p class="list-group-item-heading">						  			
+						  			<div data-ng-switch="param.CD_NOTICE">						  				
+										<span data-ng-switch-when="001">
+											[일반]
+										</span>
+										<span data-ng-switch-when="002">
+											<span style="color:red;;">[중요]</span>
+										</span> 
+										<span data-ng-switch-default>
+											[기타]
+										</span>										
+										<span>{{param.DTS_INSERT}}</span>
+									</div>
+						  		</p>
+						    	<p class="list-group-item-text ells">
+						    		<span data-ng-if="param.NO_C != null && param.NO_C != ''">[개별공지] </span>{{param.NM_SUBJECT}}
+						    	</p>
+						  	</a>
+						</div>
+					</div>
+	        	</div>
+        	</div>
+            
+            <hr class="hidden-lg hidden-xl hidden-md" />
+            
+            <!-- 마켓별 상세 카운팅  -->
+            <div class="row">
+                <div id="mall_{{mall.NO_MRK}}" class="col-xm-6 col-sm-4 col-md-3 col-xl-2" data-ng-repeat="mall in mallStat">
+                     <div class="well well-none-pad">
+                        <table class="table">  
+                            <tbody> 
+                            	<tr>
+                                    <th colspan="4">
+                                    	<a href="{{mall.DC_SALEMNGURL}}" class="name" target="_blank"><strong>{{mall.NM_MRK}} ({{mall.DC_MRKID}})</strong></a>
+		                                <a href="" data-ng-click="reloadMallStat(mall.NO_MRK)" data-ng-disabled="mall.isDisabled"><span class="glyphicon glyphicon-refresh" data-ng-class="{'warning': hasError(mall.DTS_UPDATE, 3600000), 'glyphicon-refresh-animate': mall.isDisabled, 'disabled': mall.isDisabled}"></span></a>
+		                                <a href="{{mall.DC_SALEMNGURL}}" target="_blank" data-ng-click="goOpenMrkLink()">    
+		                                	<span class="label label-primary">마켓연결​</span>
+		                                </a>
+		                                <a data-ng-href="#!/order-list/{{mall.NO_MRK}}/{{mall.NM_MRK}}/{{mall.DC_MRKID}}">
+		                                	<span class="label label-primary">상세보기​</span>
+		                                </a>
+		                                <a data-ng-if="mall.CD_ITLSTAT == '003'" data-ng-href="#!/mall-config">
+		                                	<span class="label label-primary">연동설정​</span>
+		                                </a>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>주문</th>
+                                    <td align='right'>{{mall.QT_NEWORD}}건</td> 
+                                    <th>배송준비</th>
+                                    <td align='right'>{{mall.QT_SHPRDY}}건</td>
+                                </tr>
+                                <tr>
+                                    <th>배송중</th>
+                                    <td align='right'>{{mall.QT_SHPING}}건</td>
+                                    <th>문의</th>
+                                    <td align='right'>{{mall.QT_INQ + mall.QT_ITEMINQ}}건</td>
+                                </tr>
+                                <tr>
+                                    <th>교환/반품</th>
+                                    <td align='right'>{{mall.QT_ECHG != null && mall.QT_TKBK != null ? mall.QT_ECHG + mall.QT_TKBK : ''}}건</td>
+                                    <th>취소</th>
+                                    <td align='right'>{{mall.QT_CCL}}건</td>
+                                </tr>
+                                <tr>                           
+                                    <th>조회 시간</th>
+                                    <td align='right' colspan='3'>{{long2date(mall.DTS_UPDATE)}}</td>
+                                </tr>
+                                <tr>
+                                    <th>연동구분</th>
+                                    <td align='right' colspan='3'>
+                                    	<div data-ng-switch="mall.CD_ITLSTAT">
+                                    		<div data-ng-switch-when="001">
+                                    			<span class="label label-default">미연동</span>
+                                    		</div>                                    		
+                                    		<div data-ng-switch-when="002">
+                                    			<span class="label label-success">연동성공</span>
+                                    		</div>                                    		
+                                    		<div data-ng-switch-default>							
+                                    		 	<span class="label label-danger">연동실패</span>
+											</div>
+                                    	</div>                                    
+                                    </td>         
+                                </tr>
+                                <tr data-ng-if="mall.CD_ITLSTAT === '003'">
+                                    <th width="30%">연동실패사유</th>
+                                    <td colspan="3">
+                                    	<p>{{mall.MSG_ITLSTAT}}</p>
+                                    </td>
+                                </tr>          
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="col-xm-12" data-ng-if="mallStat.length < 1">
+                	설정된 Mall이 없습니다
+                </div>
+               
+                <hr class="hidden-lg hidden-xl hidden-md" />
+                
+            </div>
+            <div class="top-link-block well well-sm" backtotop><a href="" data-ng-click="moveTo('top')"><span class="glyphicon glyphicon-chevron-up"></span> Back to Top</a></div>
+        </div>
+    </section>
+    <div data-ng-include="'template/footer.html'"></div>
+</div>

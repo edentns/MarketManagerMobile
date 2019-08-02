@@ -1,18 +1,17 @@
 <!doctype html>
-<html lang="en" ng-app="sellorToolApp">
-
+<html lang="en" data-ng-clock data-ng-app="sellorToolApp">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Seller Tool</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel='stylesheet' href="bower_components/angular-loading-bar/src/loading-bar.css" type='text/css' media='all' />	
     <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/login.css" />
     <link rel="stylesheet" href="css/order-list.css" />
     <link rel="stylesheet" href="css/mall-list.css" />
     <link rel="stylesheet" href="css/user-terms-page.css" />
-    <link rel='stylesheet' href="bower_components/angular-loading-bar/src/loading-bar.css" type='text/css' media='all' />
-
+    
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="bower_components/angular/angular.js"></script>
@@ -26,46 +25,66 @@
 
     <script src="app.module.js"></script>
     <script src="app.config.js"></script>
-	<script src="interceptor.svc.js"></script>
+	<script src="services/interceptor.svc.js"></script>
 	<script src="config.js"></script>
-    <script src="template/common.service.js"></script>
+    <script src="services/common.service.js"></script>
 	
-    <script src="app.animations.js"></script>
+    <script src="lib/app.animations.js"></script>
     <script src="core/core.module.js"></script>
     <script src="core/mall/mall.module.js"></script>
     <script src="core/mall/mall.service.js"></script>
 	
-    <script src="login/login.module.js"></script>
-    <script src="login/login.component.js"></script>
-	<script src="login/login.service.js"></script>
-	<script src="login/loginNtcPop.directive.js"></script>
+    <script src="contents/login/login.module.js"></script>
+    <script src="contents/login/login.component.js"></script>
+	<script src="contents/login/login.service.js"></script>
+	<script src="contents/login/loginNtcPop.directive.js"></script>
     
-	<script src="mall-list/mall-list.module.js"></script>
-    <script src="mall-list/mall-list.component.js"></script>
-    <script src="mall-list/mall-list.service.js"></script>
+	<script src="contents/mall-list/mall-list.module.js"></script>
+    <script src="contents/mall-list/mall-list.component.js"></script>
+    <script src="contents/mall-list/mall-list.service.js"></script>
 
-    <script src="mall-config/mall-config.module.js"></script>
-    <script src="mall-config/mall-config.component.js"></script>
-    <script src="mall-config/mall-config.service.js"></script>
+    <script src="contents/mall-config/mall-config.module.js"></script>
+    <script src="contents/mall-config/mall-config.component.js"></script>
+    <script src="contents/mall-config/mall-config.service.js"></script>
 
-    <script src="user-setting/user-setting.module.js"></script>
-    <script src="user-setting/user-setting.component.js"></script>
-    <script src="user-setting/user-setting.service.js"></script>
+    <script src="contents/user-setting/user-setting.module.js"></script>
+    <script src="contents/user-setting/user-setting.component.js"></script>
+    <script src="contents/user-setting/user-setting.service.js"></script>
 
-    <script src="user-create/user-create.module.js"></script>
-    <script src="user-create/user-create.component.js"></script>
-    <script src="user-create/user-create.service.js"></script>
+    <script src="contents/user-create/user-create.module.js"></script>
+    <script src="contents/user-create/user-create.component.js"></script>
+    <script src="contents/user-create/user-create.service.js"></script>
     
-    <script src="user-terms/user-terms.module.js"></script>
-    <script src="user-terms/user-terms.component.js"></script>
+    <script src="contents/user-terms/user-terms.module.js"></script>
+    <script src="contents/user-terms/user-terms.component.js"></script>
     
-    <script src="user-terms-page/user-terms-page.module.js"></script>
-    <script src="user-terms-page/user-terms-page.component.js"></script>
+    <script src="contents/user-terms-page/user-terms-page.module.js"></script>
+    <script src="contents/user-terms-page/user-terms-page.component.js"></script>
     
-    <script src="order-list/order-list.module.js"></script>
-    <script src="order-list/order-list.component.js"></script>
-    <script src="order-list/order-list.service.js"></script>
+    <script src="contents/order-list/order-list.module.js"></script>
+    <script src="contents/order-list/order-list.component.js"></script>
+    <script src="contents/order-list/order-list.service.js"></script>
         
+    <script src="contents/notice-list/notice-list.module.js"></script>
+    <script src="contents/notice-list/notice-list.component.js"></script>
+    <script src="contents/notice-list/notice-list.service.js"></script>
+    
+    <script src="contents/notice-info/notice-info.module.js"></script>
+    <script src="contents/notice-info/notice-info.component.js"></script>
+    <script src="contents/notice-info/notice-info.service.js"></script>
+    
+    <script src="contents/user-qna/info/user-qna-info.module.js"></script>
+    <script src="contents/user-qna/info/user-qna-info.component.js"></script>
+    <script src="contents/user-qna/info/user-qna-info.service.js"></script>
+    
+    <script src="contents/user-qna/list/user-qna-list.module.js"></script>
+    <script src="contents/user-qna/list/user-qna-list.component.js"></script>
+    <script src="contents/user-qna/list/user-qna-list.service.js"></script>
+    
+    <script src="contents/user-qna/write/user-qna-write.module.js"></script>
+    <script src="contents/user-qna/write/user-qna-write.component.js"></script>
+    <script src="contents/user-qna/write/user-qna-write.service.js"></script>
+    
 	<script>
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -88,10 +107,8 @@
 	<!--End of Zopim Live Chat Script-->
   </head>
   <body>
-
-    <div class="view-container">
-      <div ng-view class="view-frame"></div>
+	<div class="view-container">
+		<div data-ng-view class="view-frame"></div>
     </div>
-
   </body>
 </html>

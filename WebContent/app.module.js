@@ -1,7 +1,7 @@
 'use strict';
 
 // Define the `sellorToolApp` module
-angular.module('sellorToolApp', [            
+angular.module('sellorToolApp', [
 	'ngSanitize',
 	'ngRoute',
 	'angular-loading-bar',
@@ -13,5 +13,11 @@ angular.module('sellorToolApp', [
 	'userCreate',
 	'userTerms',
 	'userTermsPage',
-	'orderList'
+	'orderList',
+	'noticeList',
+	'noticeInfo',
+	'userQnaInfo',
+	'userQnaList',
+	'userQnaWrite'
 ]);
+

@@ -32,7 +32,8 @@
 				selectCla : env.root + '/selectCla?L_CD_CLA=',
 				orderList : env.root + '/ordall/ordlist?',
 				highPassCreateUser : env.root + '/highPassSaveUserJoin',
-				orderConfirm : env.root + '/ord/confirm' 
+				orderConfirm : env.root + '/ord/confirm',
+				getUt02Db: env.root + '/ut02Db' 
 			},
             auth: env.auth,
             encrypt : env.encrypt,

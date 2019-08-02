@@ -6,3 +6,16 @@
   	text-overflow: ellipsis;
 	position: relative;
 }
+.well-none-pad{
+	padding:0;
+}
+.notice-kind-ells{
+	min-width: 50px;
+}
+.ells{
+	text-overflow: ellipsis; 
+	white-space: nowrap; 
+	overflow:hidden;
+	max-width:400px;
+	max-height:100px;
+}
