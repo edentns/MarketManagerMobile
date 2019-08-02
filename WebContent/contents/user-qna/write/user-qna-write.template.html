@@ -1,0 +1,58 @@
+<div>
+    <div data-ng-include="'template/header.html'"></div>
+    <section>    	
+    	<div class="container">
+	    	<div class="row" >	    	
+            	<div class="col-xm-6 col-sm-6">
+                	<h1>문의하기</h1>
+                </div>
+            </div>
+			
+	        <div class="container order-body">
+				<div class="panel panel-default">
+	  				<!-- button group -->
+	  				<div class="panel-body">  					
+	  					<button type="button" class="btn btn-primary" data-ng-click="kindListClick('all')">등록</button>
+					</div>
+							
+	  				<!-- list -->
+	  				<div class="list-group">
+                        <div data-ng-repeat="param in noticeList.pagingLst" class="list-group-item">
+                        	<span data-ng-if="param.CD_NOTICE == '001'">
+								[일반]
+							</span>
+							<span style="color:red; font-weight: bold;" data-ng-if="param.CD_NOTICE == '002'">
+								[중요]
+							</span>							
+							<span style="font-size: 13px;">
+								{{param.DTS_INSERT}}
+							</span>
+							<p>
+								<a data-ng-href="#!/notice-info/{{param.CD_NOTICE}}/{{param.NO_NOTICE}}">
+									{{param.NM_SUBJECT}}
+								</a>
+							</p>
+                        </div>                        
+                    </div>
+                    
+                    <!-- paging -->
+	  				<div class="panel-footer text-center">  				
+	    				<ul uib-pagination     				
+	    						boundary-links="true"    						 
+	    						total-items="noticeList.lstSize" 
+	    						ng-model="noticeList.currentPage"     						
+						 		max-size="noticeList.maxSize"  
+	    						items-per-page="noticeList.numPerPage"    						
+	    						class="pagination-sm custom-pager"    						
+	    						previous-text="&lsaquo;"
+	    						next-text="&rsaquo;" 
+	    						first-text="&laquo;" 
+	    						last-text="&raquo;">
+	    				</ul>    			
+	  				</div>
+				</div>
+	        </div>
+        </div>
+    </section>
+    <div data-ng-include="'template/footer.html'"></div>
+</div>
