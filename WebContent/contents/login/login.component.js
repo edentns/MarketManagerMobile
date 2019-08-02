@@ -4,7 +4,7 @@
 angular.
 module('login').
 component('login', {
-	templateUrl: 'login/login.template.html',
+	templateUrl: 'contents/login/login.template.html',
 	controller: ['$rootScope', '$scope', '$window', '$timeout','commonService', 'loginService',
 		function LoginController($rootScope, $scope,  $window, $timeout, commonService, loginService) {
 			if (commonService.isLogin()) {
