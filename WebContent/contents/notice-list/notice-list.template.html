@@ -1,0 +1,63 @@
+<div>
+    <div data-ng-include="'template/header.html'"></div>
+    <section>    	
+    	<div class="layout-container">                
+    		<h1>공지사항 - </h1>
+			
+	        <div class="container order-body">
+				<div class="panel panel-default">
+	  				<!-- button group -->
+	  				<div class="panel-body">  					
+	  					<button type="button" class="btn btn-primary" data-ng-click="kindListClick('all')">전체</button>
+	  					<button type="button" class="btn btn-danger"  data-ng-click="kindListClick('important')">중요</button>
+	  					<button type="button" class="btn btn-default" data-ng-click="kindListClick('normal')">일반</button>
+					</div>
+							
+	  				<!-- list -->
+	  				<div class="list-group">
+                        <div data-ng-repeat="param in noticeList.pagingLst" class="list-group-item">
+                        	<span data-ng-if="param.CD_NOTICE == '001'">
+								[일반]
+							</span>
+							<span style="color:red; font-weight: bold;" data-ng-if="param.CD_NOTICE == '002'">
+								[중요]
+							</span>							
+							<span style="font-size: 13px;">
+								{{param.DTS_INSERT}}
+							</span>
+							<p>
+								<a data-ng-href="#!/notice-info/{{param.CD_NOTICE}}/{{param.NO_NOTICE}}">
+									<span data-ng-if="param.NO_C != null && param.NO_C != ''">[개별공지] </span>{{param.NM_SUBJECT}}
+								</a>
+							</p>
+                        </div>                        
+                    </div>
+                    
+                    <!-- paging -->
+	  				<div class="panel-footer text-center">  				
+	    				<ul uib-pagination     				
+	    						boundary-links="true"    						 
+	    						total-items="noticeList.lstSize" 
+	    						ng-model="noticeList.currentPage"     						
+						 		max-size="noticeList.maxSize"  
+	    						items-per-page="noticeList.numPerPage"    						
+	    						class="pagination-sm custom-pager"    						
+	    						previous-text="&lsaquo;"
+	    						next-text="&rsaquo;" 
+	    						first-text="&laquo;" 
+	    						last-text="&raquo;">
+	    				</ul>    			
+	  				</div>
+				</div>	
+	  				
+  				<div class="input-group">
+			    	<input type="text" class="form-control" placeholder="검색어를 입력해 주세요." data-ng-model="noticeList.inputSearch">
+			      	<span class="input-group-btn">
+			        	<button class="btn btn-default" type="button" data-ng-click="kindListClick('input')">검색</button>
+			      	</span>
+			    </div><!-- /input-group -->
+	        </div>
+        </div>
+    </section>
+    <div data-ng-include="'template/footer.html'"></div>
+</div>

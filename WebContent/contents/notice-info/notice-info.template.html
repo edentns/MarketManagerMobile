@@ -1,0 +1,40 @@
+<div>
+    <div data-ng-include="'template/header.html'"></div>
+    <section>    	
+    	<div class="layout-container">                
+    		<h1>공지사항 - </h1>
+			
+	        <div class="container order-body">
+				<div class="panel panel-default">					
+					<!-- subject -->
+					<div class="panel-heading">
+						<p>		
+					    	<span data-ng-if="noticeInfo.detail.CD_NOTICE == '001'">
+								[일반]
+							</span>
+							<span style="color:red; font-weight: bold;" data-ng-if="noticeInfo.detail.CD_NOTICE == '002'">
+								[중요]
+							</span>	
+							<span data-ng-if="noticeInfo.detail.YN_ALLSEL == 'N'">[개별공지] </span>
+							<span>
+				    		{{noticeInfo.detail.NM_SUBJECT}}
+				    		</span>
+				    	</p>				    	
+	  					작성일 : {{noticeInfo.detail.DTS_INSERT}}
+					</div>
+					<!-- contents -->	  					  				
+	  				<div class="panel-body">
+	  					<div class="notice-info">
+	  					</div>
+					</div>
+					
+				</div>
+							
+	  			<div class="order-subtitle-btn">
+					<a class="btn btn-info" data-ng-href="#!/notice-list" role="button">목록으로</a>	
+		    	</div>  
+	        </div>
+        </div>
+    </section>
+    <div data-ng-include="'template/footer.html'"></div>
+</div>
