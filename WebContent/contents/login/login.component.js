@@ -22,6 +22,7 @@ component('login', {
 				$scope.isDisabled = true;
 
 				var login = loginService.login($scope.bsCd, $scope.userId, $scope.password, $scope.token, $scope.device, $scope.model, $scope.product);
+				
 				login.then(function successCallback(data) {
 					//jim 
 					ga('send','event','로그인 페이지','click','로긴 성공');
@@ -42,14 +43,16 @@ component('login', {
 					$window.alert(errorMessage);
 				});
 			};
+			
 			$scope.createUser = function() {
 				ga('send','event','로그인 페이지','click','가입하기');
 			};
+			
 			$scope.moveGooglePlay = function() {
 				ga('send','event','로그인 페이지','click','GooglePlay 이동');
 				return true;
 			};
-			
+			//아이디 저장
 			$scope.isLogin = function(){
 				if ($scope.chkLogin) {
 					$window.localStorage.setItem("recentMobLoginInfo", JSON.stringify({bsCd: $scope.bsCd, userId : $scope.userId}));
@@ -78,14 +81,20 @@ component('login', {
 			};
 			
 			var init = function(){
-				var	recentLoginInfo = $window.localStorage.getItem("recentMobLoginInfo");
-			
+				/*var	recentLoginInfo = $window.localStorage.getItem("recentMobLoginInfo");
+				
+				$scope.bsCd = "";
+				$scope.userId = "";
+				$scope.password = "";
+				
 				if (recentLoginInfo) {
 					recentLoginInfo    = JSON.parse(recentLoginInfo);
 					$scope.bsCd = recentLoginInfo.bsCd; 
 					$scope.userId = recentLoginInfo.userId;
 					$scope.chkLogin  = true;
-				}
+				}*/
+				
+				$window.localStorage.removeItem("recentMobLoginInfo");
 			}
 			
 			$timeout(function(){

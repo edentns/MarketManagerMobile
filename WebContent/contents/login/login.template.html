@@ -7,25 +7,25 @@
     
     <div class="login">    	
         <h1><img src="img/login/logo_big.jpg" width="165px" alt="Sellor Tool"></h1>
-        <form ng-submit="login()">
-        	<input class="form-control input-lg" type="text" placeholder="가입자번호" autocomplete="off" ng-model="bsCd">
-            <input class="form-control input-lg" type="text" placeholder="사용자 아이디" autocomplete="off" ng-model="userId">
-            <input class="form-control input-lg" type="password" placeholder="패스워드" autocomplete="off" ng-model="password">
-            <input class="form-control input-lg" type="hidden" placeholder="푸쉬키" autocomplete="off" ng-model="token">
-            <input class="form-control input-lg" type="hidden" placeholder="디바이스" autocomplete="off" ng-model="device">
-            <input class="form-control input-lg" type="hidden" placeholder="모델" autocomplete="off" ng-model="model">
-            <input class="form-control input-lg" type="hidden" placeholder="제품" autocomplete="off" ng-model="product">
-            <div class="login-checkbox">
+        <form data-ng-submit="login()">
+        	<input class="form-control input-lg" type="text" placeholder="가입자번호" autocomplete="off" data-ng-model="bsCd">
+            <input class="form-control input-lg" type="text" placeholder="사용자 아이디" autocomplete="off" data-ng-model="userId">
+            <input class="form-control input-lg" type="password" placeholder="패스워드" autocomplete="off" data-ng-model="password">
+            <input class="form-control input-lg" type="hidden" placeholder="푸쉬키" autocomplete="off" data-ng-model="token">
+            <input class="form-control input-lg" type="hidden" placeholder="디바이스" autocomplete="off" data-ng-model="device">
+            <input class="form-control input-lg" type="hidden" placeholder="모델" autocomplete="off" data-ng-model="model">
+            <input class="form-control input-lg" type="hidden" placeholder="제품" autocomplete="off" data-ng-model="product">
+            <!-- <div class="login-checkbox">
 				<label>
 			    	<input type="checkbox" data-ng-model="chkLogin" data-ng-checked="chkLogin" data-ng-click="isLogin()"> 
 			    		<span>아이디 저장</span>
 			    </label>
-		    </div>
-            <button type="submit" ng-disabled="isDisabled" class="btn btn-primary btn-block btn-lg">로그인</button>
+		    </div> -->
+            <button type="submit" data-ng-disabled="isDisabled" class="btn btn-primary btn-block btn-lg">로그인</button>
         </form>
-        <div>&nbsp;<a href="#!/user-create" ng-click="createUser()">가입하기</a></div>
+        <div>&nbsp;<a href="#!/user-create" data-ng-click="createUser()">가입하기</a></div>
 		<div>&nbsp;</div>
-		<div>&nbsp;<a ng-click="moveGooglePlay()" href="https://play.google.com/store/apps/details?id=mm25.com.mm7" >구글 앱 다운로드</a></div>
+		<div>&nbsp;<a data-ng-click="moveGooglePlay()" href="https://play.google.com/store/apps/details?id=mm25.com.mm7" >구글 앱 다운로드</a></div>
         <br/>   
         <div class="text-center">
             <p>www.marketmanager.co.kr V 0.1.0 <span>{{loginVO.version}}</span>&nbsp&nbsp&nbsp
