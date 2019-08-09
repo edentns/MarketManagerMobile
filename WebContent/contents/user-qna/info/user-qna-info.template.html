@@ -1,56 +1,62 @@
-<div>
+<div class="bckground-clr">
     <div data-ng-include="'template/header.html'"></div>
-    <section>    	
+    <section class="section-min-height">    	
     	<div class="container">
 	    	<div class="row" >	    	
             	<div class="col-xm-6 col-sm-6">
-                	<h1>묻고 답하기(상세 내용)</h1>
+                	<h1>묻고 답하기 - 상세 내용</h1>
                 </div>
             </div>
 			
 	        <div class="container order-body">
-				<div class="panel panel-default">
-	  				<!-- button group -->
-	  				<div class="panel-body">  					
-	  					<button type="button" class="btn btn-primary" data-ng-click="kindListClick('all')">등록</button>
-					</div>
-							
+				<div class="panel panel-default">							
 	  				<!-- list -->
-	  				<div class="list-group">
-                        <div data-ng-repeat="param in noticeList.pagingLst" class="list-group-item">
-                        	<span data-ng-if="param.CD_NOTICE == '001'">
-								[일반]
-							</span>
-							<span style="color:red; font-weight: bold;" data-ng-if="param.CD_NOTICE == '002'">
-								[중요]
-							</span>							
-							<span style="font-size: 13px;">
-								{{param.DTS_INSERT}}
-							</span>
-							<p>
-								<a data-ng-href="#!/notice-info/{{param.CD_NOTICE}}/{{param.NO_NOTICE}}">
-									{{param.NM_SUBJECT}}
-								</a>
-							</p>
-                        </div>                        
+	  				<div class="list-group">	  					
+	  					<!-- 문의제목 /문의상태 -->
+	  					<div class="list-group-item disabled info-detail">
+	  						<div class="info-title">
+		  						<span data-ng-class="{ 'label label-success' : userQnaInfo.detailInfo.CD_ANSSTAT === '003', 'label label-info' : userQnaInfo.detailInfo.CD_ANSSTAT === '002', 'label label-warning' : userQnaInfo.detailInfo.CD_ANSSTAT === '001' }">
+									{{userQnaInfo.detailInfo.NM_ANSSTAT}}
+								</span>
+								 &nbsp;
+								<span data-ng-class="{ 'label label-success' : userQnaInfo.detailInfo.CD_ANSSTAT === '003', 'label label-info' : userQnaInfo.detailInfo.CD_ANSSTAT === '002', 'label label-warning' : userQnaInfo.detailInfo.CD_ANSSTAT === '001' }">
+									{{userQnaInfo.detailInfo.DTS_INSERT}}
+								</span>
+							</div>							
+                        	<p>{{userQnaInfo.detailInfo.DC_INQTITLE}}</p>
+                        </div>
+                        <!-- 문의내용 -->
+                        <div class="list-group-item info-detail info-detail-content">
+                        	<p class="dc-inqctt" data-ng-bind-html="userQnaInfo.detailInfo.DC_HTMLINQCTT"></p>
+                        </div>
+                        
+                        <!-- 답변내용 -->
+                        <div class="list-group-item info-detail" data-ng-show="userQnaInfo.detailInfo.CD_ANSSTAT === '002' || userQnaInfo.detailInfo.CD_ANSSTAT === '003'" class="list-group-item info-detail">
+                        	<div class="info-ans-title">                        		
+                        		<span class="label label-default">
+									운영자 답변
+								</span>
+								 &nbsp;
+								<span class="label label-default">
+									{{userQnaInfo.detailInfo.DTS_ANSREG}}
+								</span>
+                        	</div>
+							<!-- <div style="display:inline-block; width:10%; vertical-align:top;">
+								<p><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></p>
+							</div> -->
+							<div class="info-ans-content">							
+                        		<p class="dc-ansctt" data-ng-bind-html="userQnaInfo.detailInfo.DC_HTMLANSCTT">                        								
+                        		</p>
+							</div>
+                        </div>
                     </div>
-                    
-                    <!-- paging -->
-	  				<div class="panel-footer text-center">  				
-	    				<ul uib-pagination     				
-	    						boundary-links="true"    						 
-	    						total-items="noticeList.lstSize" 
-	    						ng-model="noticeList.currentPage"     						
-						 		max-size="noticeList.maxSize"  
-	    						items-per-page="noticeList.numPerPage"    						
-	    						class="pagination-sm custom-pager"    						
-	    						previous-text="&lsaquo;"
-	    						next-text="&rsaquo;" 
-	    						first-text="&laquo;" 
-	    						last-text="&raquo;">
-	    				</ul>    			
-	  				</div>
 				</div>
+							
+	  			<div class="text-right">
+	  				<a class="btn btn-primary" data-ng-show="userQnaInfo.detailInfo.CD_ANSSTAT === '001'" data-ng-click="userQnaInfo.qaUpdate();" role="button">수정</a>
+	  				<a class="btn btn-danger" data-ng-show="userQnaInfo.detailInfo.CD_ANSSTAT === '001'" data-ng-click="userQnaInfo.qaDelete();" role="button">삭제</a>
+					<a class="btn btn-default" data-ng-href="#!/user-qna-list" role="button">목록으로</a>	
+		    	</div>  
 	        </div>
         </div>
     </section>

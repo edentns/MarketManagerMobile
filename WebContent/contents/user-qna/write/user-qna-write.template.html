@@ -1,57 +1,29 @@
-<div>
+<div class="bckground-clr">
     <div data-ng-include="'template/header.html'"></div>
-    <section>    	
+    <section class="section-min-height">    	
     	<div class="container">
 	    	<div class="row" >	    	
             	<div class="col-xm-6 col-sm-6">
-                	<h1>문의하기</h1>
+                	<h1 data-ng-if="!userQnaWrite.isUpdate">묻고 답하기 - 문의하기</h1>
+                	<h1 data-ng-if="userQnaWrite.isUpdate">묻고 답하기 - 문의하기(수정)</h1>
                 </div>
             </div>
-			
-	        <div class="container order-body">
-				<div class="panel panel-default">
-	  				<!-- button group -->
-	  				<div class="panel-body">  					
-	  					<button type="button" class="btn btn-primary" data-ng-click="kindListClick('all')">등록</button>
-					</div>
-							
-	  				<!-- list -->
-	  				<div class="list-group">
-                        <div data-ng-repeat="param in noticeList.pagingLst" class="list-group-item">
-                        	<span data-ng-if="param.CD_NOTICE == '001'">
-								[일반]
-							</span>
-							<span style="color:red; font-weight: bold;" data-ng-if="param.CD_NOTICE == '002'">
-								[중요]
-							</span>							
-							<span style="font-size: 13px;">
-								{{param.DTS_INSERT}}
-							</span>
-							<p>
-								<a data-ng-href="#!/notice-info/{{param.CD_NOTICE}}/{{param.NO_NOTICE}}">
-									{{param.NM_SUBJECT}}
-								</a>
-							</p>
-                        </div>                        
-                    </div>
-                    
-                    <!-- paging -->
-	  				<div class="panel-footer text-center">  				
-	    				<ul uib-pagination     				
-	    						boundary-links="true"    						 
-	    						total-items="noticeList.lstSize" 
-	    						ng-model="noticeList.currentPage"     						
-						 		max-size="noticeList.maxSize"  
-	    						items-per-page="noticeList.numPerPage"    						
-	    						class="pagination-sm custom-pager"    						
-	    						previous-text="&lsaquo;"
-	    						next-text="&rsaquo;" 
-	    						first-text="&laquo;" 
-	    						last-text="&raquo;">
-	    				</ul>    			
-	  				</div>
-				</div>
+            
+           	<!-- 제목  -->
+			<div class="input-group te-title">
+		    	<input type="text" class="form-control" placeholder="제목을 입력해 주세요." data-ng-model="userQnaWrite.DC_INQTITLE">
+		    </div>
+		    <!-- 본문 -->
+	        <div class="te-container">
+               	<div text-angular data-ng-model="userQnaWrite.DC_HTMLINQCTT"></div>
 	        </div>
+            
+	        <!-- 버튼 -->
+            <div class="text-right write-btn-grp">
+            	<a class="btn btn-primary" data-ng-if="userQnaWrite.isUpdate" data-ng-click="userQnaWrite.update();" role="button">수정하기</a>     
+              	<a class="btn btn-primary" data-ng-if="!userQnaWrite.isUpdate" data-ng-click="userQnaWrite.save();" role="button">등록하기</a>                	
+				<a class="btn btn-default" data-ng-href="#!/user-qna-list" role="button">목록으로</a>	
+	    	</div>  
         </div>
     </section>
     <div data-ng-include="'template/footer.html'"></div>

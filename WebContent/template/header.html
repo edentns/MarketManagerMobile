@@ -24,7 +24,7 @@
                 <li data-ng-class="{ active: isActive('#!/user-setting')}">
                     <a href="#!/user-setting">개인정보 설정</a>
                 </li>                
-                <li data-ng-class="{ openli : isActive('#!/user-qna') || isActive('#!/notice-list') || isActive('#!/notice-info')}"
+                <li data-ng-class="{ openli : isActive('#!/user-qna-list') || isActive('#!/user-qna-info') || isActive('#!/user-qna-write') || isActive('#!/notice-list') || isActive('#!/notice-info')}"
                 	data-ng-click="ddopen = !ddopen" >
                 	<a class="dropdown-toggle"
                 		data-toggle="dropdown" 
@@ -35,10 +35,11 @@
                 		<span class="caret"></span>
                 	</a>
 		          	<ul class="dropdown-menu" 
-		          		data-ng-class="{ ddopen : (isActive('#!/user-qna') || isActive('#!/notice-list') || isActive('#!/notice-info')) && !ddopen, 'ddclose': ddopen }">
-			            <!-- <li data-ng-class="{ active: isActive('#!/user-qna-list')}">
+		          		data-ng-class="{ ddopen : (isActive('#!/user-qna-list') || isActive('#!/user-qna-info') || isActive('#!/user-qna-write') 
+		          		|| isActive('#!/notice-list') || isActive('#!/notice-info')) && !ddopen, 'ddclose': ddopen }">
+			            <li data-ng-class="{ active: isActive('#!/user-qna-list') || isActive('#!/user-qna-info') || isActive('#!/user-qna-write')}">
 			            	<a href="#!/user-qna-list">묻고 답하기</a>
-			            </li> -->
+			            </li>
 			            <li data-ng-class="{ active: isActive('#!/notice-list') || isActive('#!/notice-info')}">
 			            	<a href="#!/notice-list">공지사항</a>
 			            </li>

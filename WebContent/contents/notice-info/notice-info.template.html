@@ -1,7 +1,7 @@
-<div>
+<div class="bckground-clr">
     <div data-ng-include="'template/header.html'"></div>
-    <section>    	
-    	<div class="layout-container">                
+    <section class="section-min-height">    	
+    	<div class="container">                
     		<h1>공지사항 - </h1>
 			
 	        <div class="container order-body">
@@ -24,14 +24,13 @@
 					</div>
 					<!-- contents -->	  					  				
 	  				<div class="panel-body">
-	  					<div class="notice-info">
+	  					<div class="notice-info" data-ng-bind-html="noticeInfo.detail.DC_HTMLCONTENT">
 	  					</div>
-					</div>
-					
+					</div>					
 				</div>
 							
 	  			<div class="order-subtitle-btn">
-					<a class="btn btn-info" data-ng-href="#!/notice-list" role="button">목록으로</a>	
+					<a class="btn btn-default" data-ng-href="#!/notice-list" role="button">목록으로</a>	
 		    	</div>  
 	        </div>
         </div>

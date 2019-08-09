@@ -61,4 +61,33 @@ app.config(['$locationProvider' ,'$routeProvider', 'cfpLoadingBarProvider',
       }).
       otherwise('/login');
 	}
-]);
+])
+.config(function($mdDateLocaleProvider) {
+    moment.locale("ko");
+    
+    $mdDateLocaleProvider.parseDate = function(dateString) {
+        var m = moment(dateString, 'L', true);
+        return m.isValid() ? m.toDate() : new Date(NaN);
+    };
+    	
+	$mdDateLocaleProvider.formatDate = function(date) {
+       return moment(date).format('YYYY-MM-DD');
+	};
+});
+
+angular.module('textAngular').config(['$provide', function($provide) {
+	$provide.decorator('taOptions', ['$delegate',
+       function textAngularManager($delegate) {
+		   var toolbar = [ 
+	           	            /*["h1", "h2", "h3", "h4", "h5", "h6", "p", "pre", "quote"],*/
+	           	            ["bold", "italics", "underline", "strikeThrough", "ul", "ol",/* "redo",*/ "undo"/*, "clear"*/],
+	           	            ["justifyLeft", "justifyCenter", "justifyRight", "justifyFull", "indent", "outdent"]
+	           	            /*["html", "insertImage", "insertLink", "insertVideo", "wordcount", "charcount"]*/
+	  		             ];
+		   $delegate.toolbar = toolbar;
+	  	   return $delegate;
+  	   }	
+  	]);
+}]);
+
+

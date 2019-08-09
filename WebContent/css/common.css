@@ -253,3 +253,9 @@ required-field.{
 .layout-container{
 	padding: 5px;
 }
+.bckground-clr{
+	background-color:#fff;
+}
+.section-min-height{
+	min-height: 600px;
+}

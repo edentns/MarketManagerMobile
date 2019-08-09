@@ -33,7 +33,10 @@
 				orderList : env.root + '/ordall/ordlist?',
 				highPassCreateUser : env.root + '/highPassSaveUserJoin',
 				orderConfirm : env.root + '/ord/confirm',
-				getUt02Db: env.root + '/ut02Db' 
+				getUt02Db: env.root + '/ut02Db',
+				commonCode : env.root + '/code/common',
+				qaSave : env.root + '/sy/qaInsert/',
+				qaDelete : env.root + '/sy/qaDelete'
 			},
             auth: env.auth,
             encrypt : env.encrypt,

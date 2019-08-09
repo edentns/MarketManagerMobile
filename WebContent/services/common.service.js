@@ -4,15 +4,17 @@
 		.module('sellorToolApp')
 		.factory('commonService', commonService);
 
-	commonService.$inject = ['$rootScope', '$window', 'config', '$http'];
-	function commonService($rootScope,  $window, config, $http) {
+	commonService.$inject = ['$rootScope', '$window', 'config', '$http', '$q'];
+	function commonService($rootScope,  $window, config, $http, $q) {
 		return {
 			isLogin: isLogin,
 			logout: logout,
 			long2date: long2date,
 			short2date: short2date,
 			init: init,
-			getPagingPage: getPagingPage
+			getPagingPage: getPagingPage,
+			getCommonCodeList : getCommonCodeList,
+			getUt02Db : getUt02Db
 		};
 		function init($scope){
 			if(!isLogin()) {
@@ -116,6 +118,89 @@
         	});*/
         	
         	return rstList;
+		}
+		
+		/**
+		 * 조회 화면의 공통 코드 조회
+		 * @param {JSON * 2개 입력}
+		 * @returns 콩통 코드 리스트 출력
+		 */
+		function getCommonCodeList(param) {
+			var url = config.api.commonCode,
+				lnomngcdhd = param.lnomngcdhd,
+				lcdcls = param.lcdcls,
+				def = $q.defer(),
+				rtnVal = [];	
+			
+			$http.defaults.headers.common.NO_M = 'SYME17041121';
+			
+			var req = $http({
+				method	: "GET",
+				url		: url+"/"+lnomngcdhd+"/"+lcdcls+"/undefined"+"/undefined",
+				headers	: { "Content-Type": "application/x-www-form-urlencoded; text/plain; */*; charset=utf-8" }
+			});
+			
+			req.then(function successCallback(response) {
+				$http.defaults.headers.common.NO_M = '';
+				//rtnVal.errorCode = "0";		
+				try{
+					if(response.data.length){
+						var resData = response.data,
+							defaultValue = {NM_DEF : "전체", CD_DEF: "*"};
+						rtnVal.push(defaultValue);
+						angular.forEach(resData, function(item){
+							rtnVal.push(item);
+						})
+					}
+					else{
+						rtnVal = [];
+					}
+				}catch(e){
+					console.log(e);
+				}				
+				def.resolve(rtnVal);
+			}, function errorCallback(response) {
+				//rtnVal.errorCode = "1";
+				def.resolve(response);
+			});
+			return def.promise;			
+		};
+		
+		/**
+		 * 공통 프로시져 조회
+		 * */
+		function getUt02Db (param){
+			var url = config.api.getUt02Db,
+				def = $q.defer(),
+				rtnVal = [];	
+		
+			$http.defaults.headers.common.NO_M = 'SYME17122901';
+			
+			var req = $http({
+				method: 'POST',
+				url: url,
+				data: param
+			});
+	
+			req.then(function successCallback(response) {
+				$http.defaults.headers.common.NO_M = '';
+				//rtnVal.errorCode = "0";		
+				try{
+					if(response.data.results[0].length){
+						rtnVal = response.data.results[0];
+					}
+					else{
+						rtnVal = [];
+					}
+				}catch(e){
+					console.log(e);
+				}				
+				def.resolve(rtnVal);
+			}, function errorCallback(response) {
+				//rtnVal.errorCode = "1";
+				def.resolve(response);
+			});
+			return def.promise;
 		}
 	}
 })();

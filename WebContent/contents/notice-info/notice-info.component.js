@@ -27,14 +27,14 @@ component('noticeInfo', {
             		};
             	
             	noticeInfoService.getDetailNotice(pParam).then(function(res){
-            		var divElement, htmlElement;
+            		//var divElement, htmlElement;
             		me.detail = res[0];
             		
-                	divElement = angular.element(document.querySelector('.notice-info'));
+                	/*divElement = angular.element(document.querySelector('.notice-info'));
                 	htmlElement = angular.element("<div>"+me.detail.DC_HTMLCONTENT+"</div>");
             		
             		divElement.append(htmlElement);
-            		$compile(divElement)($scope);
+            		$compile(divElement)($scope);*/
             	}, function(err){
             		me.detail = {};
             	});

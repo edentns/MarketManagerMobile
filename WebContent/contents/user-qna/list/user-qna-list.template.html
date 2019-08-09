@@ -1,48 +1,101 @@
-<div>
+<div class="bckground-clr">
     <div data-ng-include="'template/header.html'"></div>
-    <section>    	
+    <section class="section-min-height">    	
     	<div class="container">
 	    	<div class="row" >	    	
             	<div class="col-xm-6 col-sm-6">
                 	<h1>묻고 답하기 - </h1>
-                </div>
+                </div>    
             </div>
 			
 	        <div class="container order-body">
 				<div class="panel panel-default">
 	  				<!-- button group -->
-	  				<div class="panel-body">  					
-	  					<button type="button" class="btn btn-primary" data-ng-click="writeClick()">등록</button>	  					
+	  				<div class="panel-body">
+	  					<div>
+	  						<a class="btn btn-primary" href="#!/user-qna-write" role="button">+ 문의등록</a>
+	  					</div>
+	  					
+	  					<div data-ng-click="openFilter = !openFilter">
+	  						<span class="glyphicon glyphicon-filter" aria-hidden="true" style="text-decoration: underline;"></span>	  						
+	  						<span class="glyphicon glyphicon-menu-up" aria-hidden="true" data-ng-if="openFilter"></span>	  					
+	  						<span class="glyphicon glyphicon-menu-down" aria-hidden="true" data-ng-if="!openFilter"></span>
+	  					</div>	  					
 					</div>
+					<!-- search filter  -->
+					<table class="table filter-part" data-ng-if="openFilter">
+					<!-- <table class="table filter-part"> -->
+						<tr>
+							<td width="30%">
+								기간 
+							</td>						
+							<td align="right">								
+					    		<div class="btn-group">
+							        <label class="btn btn-default" data-ng-model="userQnaList.btwRadioModel" data-uib-btn-radio="'3d'">3일</label>
+							        <label class="btn btn-default" data-ng-model="userQnaList.btwRadioModel" data-uib-btn-radio="'1w'">1주일</label>
+							        <label class="btn btn-default" data-ng-model="userQnaList.btwRadioModel" data-uib-btn-radio="'1m'">1개월</label>
+				    			</div>
+						    	<md-datepicker ng-model="userQnaList.btwStartDatePicker" md-placeholder=""></md-datepicker>
+						    	<md-datepicker ng-model="userQnaList.btwEndDatePicker" md-placeholder=""></md-datepicker>
+							</td>
+						</tr>
+						<tr>
+							<td width="30%">	
+								답변상태						
+							</td>							
+							<td>
+					    		<select class="form-control"   
+					    								 data-ng-model="userQnaList.selectValue"
+														 data-ng-change=""
+														 data-ng-options="list.NM_DEF for list in userQnaList.selectList track by list.NM_DEF">								 
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td width="30%">	
+								문의내용						
+							</td>							
+							<td>
+					    		<div class="input-group">
+							    	<input type="text" class="form-control" placeholder="문의내용을 입력해 주세요." data-ng-model="userQnaList.inputSearch">
+							    </div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" align="right">
+					    		<a class="btn btn-primary" href="#" data-ng-click="userQnaList.search($event);"  role="button">조회하기</a>
+					    		<a class="btn btn-default" href="#" data-ng-click="userQnaList.clickiFilterInit($event);" role="button">초기화</a>						
+							</td>			
+						</tr>
+					</table>
 							
-	  				<!-- list -->
+	  				<!-- have list -->
 	  				<div class="list-group">
-                        <div data-ng-repeat="param in noticeList.pagingLst" class="list-group-item">
-                        	<span data-ng-if="param.CD_NOTICE == '001'">
-								[일반]
+                        <div data-ng-repeat="param in userQnaList.pagingLst" class="list-group-item">
+							<p class="list-subject">
+								<a href="#!/user-qna-info" data-ng-click="userQnaList.loadDetailInfo(param)">{{param.DC_INQTITLE}}</a>
+							</p>				
+							<span class="list-stat warning" data-ng-class="{ 'label label-success' : param.CD_ANSSTAT === '003', 'label label-info' : param.CD_ANSSTAT === '002', 'label label-warning' : param.CD_ANSSTAT === '001' }">
+								{{param.NM_ANSSTAT}}
 							</span>
-							<span style="color:red; font-weight: bold;" data-ng-if="param.CD_NOTICE == '002'">
-								[중요]
-							</span>							
-							<span style="font-size: 13px;">
-								{{param.DTS_INSERT}}
-							</span>
-							<p>
-								<a data-ng-href="#!/notice-info/{{param.CD_NOTICE}}/{{param.NO_NOTICE}}">
-									{{param.NM_SUBJECT}}
-								</a>
-							</p>
-                        </div>                        
+							<span class="list-dts">&nbsp;/&nbsp;{{param.DTS_INSERT}}</span>
+                        </div>                    
+                    </div>
+                    <!-- none list -->
+                    <div class="list-group">
+                    	<div data-ng-show="!userQnaList.isList" class="list-group-item none-list">
+                    		<span>조회된 문의 내역이 없습니다.</span>
+                    	</div>
                     </div>
                     
                     <!-- paging -->
 	  				<div class="panel-footer text-center">  				
 	    				<ul uib-pagination     				
 	    						boundary-links="true"    						 
-	    						total-items="noticeList.lstSize" 
-	    						ng-model="noticeList.currentPage"     						
-						 		max-size="noticeList.maxSize"  
-	    						items-per-page="noticeList.numPerPage"    						
+	    						total-items="userQnaList.lstSize" 
+	    						ng-model="userQnaList.currentPage"     						
+						 		max-size="userQnaList.maxSize"  
+	    						items-per-page="userQnaList.numPerPage"    						
 	    						class="pagination-sm custom-pager"    						
 	    						previous-text="&lsaquo;"
 	    						next-text="&rsaquo;" 
@@ -56,3 +109,4 @@
     </section>
     <div data-ng-include="'template/footer.html'"></div>
 </div>
+
