@@ -1,3 +1,47 @@
+v2.0.5
+======
+
+- Fixed issue with Angular 6 breaking webpack implementation of global context.
+- Fixed issue with Date#get with past/future options.
+- Fixed issue with parsing of "Mar-3".
+- Fixed issue with parsing of "10:".
+- Fixed issue with parsing of "end of year", etc.
+- Fixed issue with specificity param being incorrectly set.
+- Fixed issue with future option causing a day shift in format "this week tuesday".
+- Fixed issue with inconsistency when overshooting certain units in parsing.
+- Fixed issue with Array#max and empty strings.
+- Fixed issue with incorrect order of "next/last" in Italian dates.
+- Fixed issues with UTC times being reset and timezone abbreviations.
+- Fixed issue with Finnish period as time separator interfering with date parsing.
+- Fixed issues with Typescript declarations including better handling of generics.
+- Temporary fix for bad parsing of ambiguous 일 token for day/Sunday.
+- Restored VERSION property to the core.
+- Fixed issue with future dates.
+
+v2.0.4
+======
+
+- Fixed issue with Typescript declarations not exporting all packages.
+
+v2.0.3
+======
+
+- Updated Typescript declaration files to better handle modules.
+- Added type guards to isString... declarations.
+- Fixed issue with Range date unit methods on invalid ranges.
+
+v2.0.2
+======
+
+- Added Typescript declaration files.
+
+
+v2.0.1
+======
+
+- Fixed issues with locales not being ignored in modularized repos.
+
+
 v2.0.0
 ======
 

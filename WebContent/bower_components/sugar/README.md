@@ -1,6 +1,7 @@
 # Sugar
 
-[![Build Status](https://secure.travis-ci.org/andrewplummer/Sugar.png)](http://travis-ci.org/andrewplummer/Sugar)
+[![Build Status](https://travis-ci.org/andrewplummer/Sugar.svg)](http://travis-ci.org/andrewplummer/Sugar)
+[![Coverage Status](https://coveralls.io/repos/andrewplummer/Sugar/badge.svg?branch=master)](https://coveralls.io/r/andrewplummer/Sugar?branch=master)
 
 A Javascript library for working with native objects.
 
@@ -17,14 +18,16 @@ A Javascript library for working with native objects.
 - [**Date Locales**](#date-locales)
 - [**Timezones**](#timezones)
 - [**Defining Methods**](#defining-methods)
+- [**Plugins**](#plugins)
 - [**Contributing**](#contributing)
+- [**Road Map**](#road-map)
 
 ---------------------------------------
 
 
-# v2.0.0
+# v2.0.4
 
-### [sugar.js](https://raw.githubusercontent.com/andrewplummer/Sugar/2.0.0/dist/sugar.js) | [sugar.min.js (24kb gz)](https://raw.githubusercontent.com/andrewplummer/Sugar/2.0.0/dist/sugar.min.js)
+### [sugar.js](https://raw.githubusercontent.com/andrewplummer/Sugar/2.0.4/dist/sugar.js) | [sugar.min.js (24kb gz)](https://raw.githubusercontent.com/andrewplummer/Sugar/2.0.4/dist/sugar.min.js)
 
 
 ## Install
@@ -153,28 +156,28 @@ Other non-default modules can be found individually (i.e. `sugar-language`, etc)
 
 ## Date Locales
 
-Locale definition files are in the [locales](locales/) directory. They can be
+Locale definition files are in the [locales](lib/locales/) directory. They can be
 simply included as-is after Sugar is loaded, or built together using
 [custom builds](#custom-builds). English is included by default and required by
 the Date module. Currently available locales are:
 
-- [Catalan (ca)](locales/ca.js)
-- [Danish (da)](locales/da.js)
-- [Dutch (nl)](locales/nl.js)
-- [Finnish (fi)](locales/fi.js)
-- [French (fr)](locales/fr.js)
-- [German (de)](locales/de.js)
-- [Italian (it)](locales/it.js)
-- [Japanese (ja)](locales/ja.js)
-- [Korean (ko)](locales/ko.js)
-- [Norwegian (no)](locales/no.js)
-- [Polish (pl)](locales/pl.js)
-- [Portuguese (pt)](locales/pt.js)
-- [Russian (ru)](locales/ru.js)
-- [Spanish (es)](locales/es.js)
-- [Swedish (sv)](locales/sv.js)
-- [Simplified Chinese (zh-CN)](locales/zh-CN.js)
-- [Traditional Chinese (zh-TW)](locales/zh-TW.js)
+- [Catalan (ca)](lib/locales/ca.js)
+- [Danish (da)](lib/locales/da.js)
+- [Dutch (nl)](lib/locales/nl.js)
+- [Finnish (fi)](lib/locales/fi.js)
+- [French (fr)](lib/locales/fr.js)
+- [German (de)](lib/locales/de.js)
+- [Italian (it)](lib/locales/it.js)
+- [Japanese (ja)](lib/locales/ja.js)
+- [Korean (ko)](lib/locales/ko.js)
+- [Norwegian (no)](lib/locales/no.js)
+- [Polish (pl)](lib/locales/pl.js)
+- [Portuguese (pt)](lib/locales/pt.js)
+- [Russian (ru)](lib/locales/ru.js)
+- [Spanish (es)](lib/locales/es.js)
+- [Swedish (sv)](lib/locales/sv.js)
+- [Simplified Chinese (zh-CN)](lib/locales/zh-CN.js)
+- [Traditional Chinese (zh-TW)](lib/locales/zh-TW.js)
 
 #### Adding/Customizing Locales
 
@@ -234,8 +237,23 @@ Number.randomish(); // ???
 
 See the [docs](https://sugarjs.com/docs/#/Sugar) for options and other helpers.
 
+## Plugins
+
+If you are defining methods that are useful to the general public, please consider
+releasing them as a Sugar plugin! Refer to the
+[plugin boilerplate](https://github.com/andrewplummer/sugar-plugin-boilerplate)
+repo for an example to get started.
+
 ## Contributing
 
 If you would like to issue a pull request, please first consider adding well
 formed [unit tests](test/tests/). These tests can be run directly in the browser
 from the [test/browser/](test/browser/) directory or in node with `npm test`.
+
+## Road Map
+
+Proposals for core features or major method changes will be added to the
+[road map](https://github.com/andrewplummer/Sugar/wiki/Road-Map). New methods
+may or may not be accepted, depending on their utility. Generally, they will
+first be delegated to plugins that may eventually be added to the main library
+when they reach a certain stage of popularity.

@@ -1322,13 +1322,9 @@ function toJson(obj, pretty) {
  * @returns {Object|Array|string|number} Deserialized JSON string.
  */
 function fromJson(json) {
-	var retJson = json;
-	try {
-		retJson = isString(json)? JSON.parse(json):json;
-	}
-	catch(e) {
-	}
-	return retJson
+  return isString(json)
+      ? JSON.parse(json)
+      : json;
 }
 
 

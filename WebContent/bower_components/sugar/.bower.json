@@ -31,15 +31,14 @@
   "moduleType": [
     "globals"
   ],
-  "version": "2.0.0",
-  "_release": "2.0.0",
+  "version": "2.0.6",
+  "_release": "2.0.6",
   "_resolution": {
     "type": "version",
-    "tag": "2.0.0",
-    "commit": "7f2521ab21c34fabf74f5187b2e6ede8e858da19"
+    "tag": "2.0.6",
+    "commit": "4adba2e6ef8c8734a693af3141461dec6d674d50"
   },
   "_source": "https://github.com/andrewplummer/Sugar.git",
-  "_target": "^2.0.0",
-  "_originalSource": "sugar",
-  "_direct": true
+  "_target": "^2.0.6",
+  "_originalSource": "sugar"
 }
